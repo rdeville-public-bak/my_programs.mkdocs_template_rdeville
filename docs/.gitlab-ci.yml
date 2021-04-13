@@ -1,10 +1,7 @@
-
-
+---
 ### BEGIN MKDOCS TEMPLATE ###
 ### WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !###
 ### Modified content will be overwritten when updating.###
-
----
 # GLOBAL CONFIGURATION
 # =============================================================================
 # YAML Anchors
@@ -453,35 +450,20 @@ build_pdf:
     - rsync -avz "tmp/" "${RSYNC_DEST}"
     - echo -e "
       <!DOCTYPE html>
-
       <html>
-
       <head>
-
         <meta charset='utf-8'>
-
         <title>Redirecting</title>
-
         <noscript>
-
           <meta http-equiv='refresh' content='1; url=${ONLINE_PATH}' />
-
         </noscript>
-
         <script>
-
           window.location.replace('${ONLINE_PATH}');
-
         </script>
-
       </head>
-
       <body>
-
         Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...
-
       </body>
-
       </html>" > index.html
     - rsync -avz index.html "${RSYNC_DEST}${PROJECT_PATH}/"
     - rsync -avz versions.json "${RSYNC_DEST}${PROJECT_PATH}/"
@@ -583,11 +565,9 @@ inform_triggers_variables:
           INFO - the \`MAIN_PROJECT\`."
       fi
 
+### END MKDOCS TEMPLATE ###
+
 # *****************************************************************************
 # VIM MODELINE
 # vim: fdm=indent
 # *****************************************************************************
-
-### END MKDOCS TEMPLATE ###
-
-
