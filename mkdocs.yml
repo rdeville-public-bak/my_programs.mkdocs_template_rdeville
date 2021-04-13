@@ -44,79 +44,37 @@ theme:
     - navigation.tabs
     - navigation.instant
     - navigation.top
-  # Setting colors palette (these are defined in docs/theme/css/{colors,theme}.css)
+  # Setting colors palette
   palette:
-    # Light mode
+      # Light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: rdeville-light
-      primary: rdeville-green-light
-      accent: rdeville-orange-light
+      scheme: default
+      primary: deep-purple
+      accent: yellow
       toggle:
-        icon: material/weather-night
+        icon: material/weather-sunny
         name: Switch to dark mode
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
-      scheme: rdeville-dark
-      primary: rdeville-green-dark
-      accent: rdeville-orange-dark
+      scheme: slate
+      primary: deep-purple
+      accent: yellow
       toggle:
-        icon: material/weather-sunny
+        icon: material/weather-night
         name: Switch to light mode
-  # Font configuration for the website (FurCode are provided in
-  # docs/theme/fonts)
+  # Font configuration for the website
   font: false
-  #  text: FuraCode Nerd Font
-  #  code: FuraCode Nerd Font
+  #  text:
+  #  code:
   # Path to logo and icons to use for the website
   #logo:    # Automatically set by mkdocs_macros_plugin (see docs/_data/plugins.py)
   #icon:
   #  repo:  # Automatically set by mkdocs_macros_plugin (see docs/_data/plugins.py)
   #favicon: # Automatically set by mkdocs_macros_plugin (see docs/_data/plugins.py)
 
-# External CSS
-# ---------------------------------------------------------------------------
-extra_css:
-  # Define css for lightgallery
-  # From: https://github.com/g-provost/lightgallery-markdown
-  - theme/css/lightgallery.css
-  # Define personal extra css
-  # Define colors (all materials colors RGB code)
-  - theme/css/colors.css
-  # Define fonts
-  - theme/css/fonts.css
-  # Define themes
-  - theme/css/theme.css
-  # Define css of base markdown extension and pymdown extension
-  - theme/css/python_markdown_extension.css
-
-# External JS
-# ---------------------------------------------------------------------------
-extra_javascript:
-  # Define javascript for lightgallery
-  # From: https://github.com/g-provost/lightgallery-markdown
-  - theme/js/lightgallery.js
-  - theme/js/lg-video.js
-  # Define javascript for arithmatex (auto downloaded with tools/upgrade_external_dependencies)
-  # From: https://squidfunk.github.io/mkdocs-material/reference/mathjax/#arithmatex
-  - theme/js/polyfill.js
-  - theme/js/es5/tex-chtml.js
-  # Define javascript to allow table sorting
-  # From: https://squidfunk.github.io/mkdocs-material/reference/data-tables/#sortable-tables
-  - theme/js/tablesort.min.js
-  # Define javascript for mermaid
-  # From: https://github.com/fralau/mkdocs-mermaid2-plugin#explicit-declaration-of-the-mermaid-library
-  - theme/js/mermaid.js
-  # Define javascript for custom pymdown mermaid loader
-  # From: https://facelessuser.github.io/pymdown-extensions/extras/mermaid/#custom-loader
-  - theme/js/mermaid-loader.js
-  # Define personal custom javascript
-  - theme/js/extra.js
-
 # Extensions
 # ---------------------------------------------------------------------------
 markdown_extensions:
-  # Allow to include markdown files
-  # https://github.com/sethen/markdown-include
   - markdown_include.include:
       base_path: ./
   # Python Markdown Extensions
@@ -136,89 +94,53 @@ markdown_extensions:
   - markdown.extensions.md_in_html:
   # Pymdown Extensions
   # https://facelessuser.github.io/pymdown-extensions/extensions/arithmatex/
-  - pymdownx.extra:
-  - pymdownx.arithmatex:
-      generic: true
   - pymdownx.betterem:
-  - pymdownx.details:
-  - pymdownx.caret:
-  - pymdownx.escapeall:
-      hardbreak: True
-      nbsp: True
-  - pymdownx.critic:
-  - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.twemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-      options:
-        image_path: /assets/twemoji/svg/
-        custom_icons:
-          - .icons
-  - pymdownx.inlinehilite:
-      custom_inline:
-        - name: math
-          class: arithmatex
-          format: !!python/name:pymdownx.arithmatex.inline_generic_format
-  - pymdownx.highlight:
-      linenums: true
-      linenums_special: 2
-      linenums_style: pymdownx-inline
-      guess_lang: false
-      extend_pygments_lang:
-        - name: pycon3
-          lang: pycon
-          options:
-            python3: true
-  - pymdownx.keys:
-      separator: "\uff0b"
-  - pymdownx.mark:
-  - pymdownx.magiclink:
-      repo_url_shortener: true
-  - pymdownx.progressbar:
-  - pymdownx.pathconverter:
-  - pymdownx.smartsymbols:
-  - pymdownx.snippets:
-  - pymdownx.striphtml:
+  - pymdownx.tabbed:
   - pymdownx.superfences:
       preserve_tabs: true
       # Make exceptions to highlighting code of following classes:
       custom_fences:
         - name: math
           class: arithmatex
-          format: !!python/name:pymdownx.arithmatex.fence_generic_format
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.tabbed:
+          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
+  - pymdownx.highlight:
+      extend_pygments_lang:
+        - name: php-inline
+          lang: php
+          options:
+            startinline: true
+        - name: pycon3
+          lang: pycon
+          options:
+            python3: true
+      linenums_style: pymdownx-inline
+  - pymdownx.inlinehilite:
+      custom_inline:
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.inline_mathjax_format
+  - pymdownx.tilde:
+  - pymdownx.caret:
+  - pymdownx.critic:
+  - pymdownx.smartsymbols:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      options:
+        custom_icons:
+          - .icons
+  - pymdownx.escapeall:
+      hardbreak: True
+      nbsp: True
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.tilde:
-  # Locally installed in docs/theme/plugins/ from original repo
-  # https://github.com/g-provost/lightgallery-markdown
-  - lightgallery:
-
-# Extra Data Information & Customization
-# ---------------------------------------------------------------------------
-# Dictionary storing social icon that will be shown on the bottom right.
-extra:
-  social:
-    - icon: fontawesome/solid/globe
-      link: https://romaindeville.fr
-    - icon: fontawesome/solid/paper-plane
-      link: mailto:contact@romaindeville.fr
-    - icon: fontawesome/solid/book-reader
-      link: https://docs.romaindeville.fr
-    - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/romaindeville
-    - icon: fontawesome/brands/docker
-      link: https://hub.docker.com/u/rdeville
-    - icon: fontawesome/brands/git-alt
-      link: https://framagit.org/rdeville.public/
-    - icon: fontawesome/brands/gitlab
-      link: https://gitlab.com/rdeville.public/
-    - icon: fontawesome/brands/github
-      link: https://github.com/rdeville-public/
-  version:
-    provider: mike
+  - pymdownx.progressbar:
+  - pymdownx.arithmatex:
+  - pymdownx.mark:
+  - pymdownx.striphtml:
+  - pymdownx.keys:
+      separator: "\uff0b"
+  - pymdownx.details:
 
 # Plugins
 # ---------------------------------------------------------------------------
@@ -251,12 +173,6 @@ plugins:
     # This plugin enables you to build multiple sets of documentation in a
     # single Mkdocs.
   - monorepo:
-  # A Mermaid graphs plugin for mkdocs
-  # https://github.com/fralau/mkdocs-mermaid2-plugin#declaring-the-superfences-extension
-  - mermaid2:
-      arguments:
-        theme: |
-          ^(localStorage.getItem('theme') === 'rdeville-dark') ? 'dark'  : 'light'
     # https://pawamoy.github.io/mkdocstrings/
     # Automatic documentation from sources, for MkDocs.
   - mkdocstrings:
@@ -271,7 +187,7 @@ plugins:
             # Others command such as sys.path.append("path") are
             # Automatically added using mkdocs_macros_plugin
             # (see docs/_data/plugins.py)
-# DO NOT FORGET TO ADD/UPDATE THE \`nav\` KEY BELOW.
+# DO NOT FORGET TO ADD/UPDATE THE \`nav\` AND \`extra\` KEYS BELOW.
 ### END MKDOCS TEMPLATE ###
 
 # Navigation Pane
