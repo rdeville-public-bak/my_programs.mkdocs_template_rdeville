@@ -35,10 +35,12 @@ commands =
   # Lint python files using pylint
   bash -c '\
     pylint \
+      --disable=R0801 \
       $(find . -type f \\( \
         -name "*.py" \
         -not -path "./.*" \
         -not -path "./docs/theme/*" \
+        -not -path "./preview/*" \
         -not -path "./python_venv/*" \
         -not -path "./tmp/*" \
         -not -path "./site**/*"  \\) )'
@@ -66,7 +68,6 @@ commands =
         -not -path "./.*" \
         -not -path "./python_venv/*" \\) ) '
   bash -c 'DIRENV_ROOT="$(pwd)" ./tools/generate_source_docs.sh --dry-run'
-
 
 [testenv:build_doc]
 # Allow external commands
