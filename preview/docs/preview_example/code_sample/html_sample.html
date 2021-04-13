@@ -1,0 +1,660 @@
+<!-- a -->
+<a>Link without href</a>
+<a class="button">Link without href: Button</a>
+<a href="#">Link without href</a>
+<a class="button" href="#">Link without href: Button</a>
+
+<!-- abbr -->
+<abbr title="Abbreviation">abbr</abbr>
+
+<!-- address -->
+<address>
+You can contact author at <a href="http://www.somedomain.com/contact">www.somedomain.com</a>.<br>
+If you see any bugs, please <a href="mailto:webmaster@somedomain.com">contact webmaster</a>.<br>
+You may also want to visit us:<br>
+Mozilla Foundation<br>
+1981 Landings Drive<br>
+Building K<br>
+Mountain View, CA 94043-0801<br>
+USA
+</address>
+
+<!-- area -->
+<map name="primary">
+  <area shape="circle" coords="200,250,25" href="http://google.com" />
+  <area shape="default" nohref />
+</map>
+
+<!-- article -->
+<article>
+  <h4>A really awesome article</h4>
+  <p>Lots of awesome text.</p>
+</article>
+
+<!-- aside -->
+<article>
+  <p>
+    The Disney movie <em>The Little Mermaid</em> was
+    first released to theatres in 1989.
+  </p>
+  <aside>
+    The movie earned $87 million during its initial release.
+  </aside>
+  <p>
+    More info about the movie...
+  </p>
+</article>
+
+
+<!-- audio -->
+<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg" autoplay>
+  Your browser does not support the <code>audio</code> element.
+</audio>
+
+<audio src="foo.ogg">
+  <track kind="captions" src="foo.en.vtt" srclang="en" label="English">
+  <track kind="captions" src="foo.sv.vtt" srclang="sv" label="Svenska">
+</audio>
+
+<audio controls="controls">
+  Your browser does not support the <code>audio</code> element.
+  <source src="foo.wav" type="audio/wav">
+</audio>
+
+<!-- b -->
+<b>Bold</b>
+
+<!-- bdi -->
+<bdi>ARABIC_PLACEHOLDER</bdi>
+
+<!-- bdo -->
+<bdo dir="rtl">This text will go right to left.</bdo>
+
+<!-- blockquote -->
+<blockquote cite="http://developer.mozilla.org">
+  <p>This is a quotation taken from the Mozilla Developer Center.</p>
+</blockquote>
+
+<!-- button -->
+<button>Button</button>
+
+<!-- canvas -->
+<canvas id="canvas" width="300" height="300">
+  Sorry, your browser doesn't support the &lt;canvas&gt; element.
+</canvas>
+
+<!-- cite -->
+<cite>[ISO-0000]</cite>
+
+<!-- code -->
+<code>Code Block</code>
+
+<!-- data -->
+<data value="12345">Data</data>
+
+<!-- datalist -->
+<input list="browsers" />
+<datalist id="browsers">
+  <option value="Chrome">
+  <option value="Firefox">
+  <option value="Internet Explorer">
+  <option value="Opera">
+  <option value="Safari">
+</datalist>
+
+<!-- del -->
+<del>This text has been deleted</del>
+
+<!-- details -->
+<details>
+  <summary>Some details</summary>
+  <p>More info about the details.</p>
+</details>
+
+
+<!-- dfn, dt, dd, dl -->
+<dl>
+  <dt>
+    <dfn>
+      <abbr title="World-Wide Web">WWW</abbr>
+    </dfn>
+  </dt>
+  <dd>The World-Wide Web (WWW) is a system of interlinked hypertext documents accessed on <a href="#def-internet">the Internet</a>.</dd>
+</dl>
+
+<!-- dialog -->
+<dialog open>
+  <p>Greetings, one and all!</p>
+</dialog>
+
+<dialog id="favDialog">
+  <form method="dialog">
+    <section>
+      <p><label for="favAnimal">Favorite animal:</label>
+      <select id="favAnimal" name="favAnimal">
+        <option></option>
+        <option>Brine shrimp</option>
+        <option>Red panda</option>
+        <option>Spider monkey</option>
+      </select></p>
+    </section>
+    <menu>
+      <button id="cancel" type="reset">Cancel</button>
+      <button type="submit">Confirm</button>
+    </menu>
+  </form>
+</dialog>
+
+<menu>
+  <button id="updateDetails">Update details</button>
+</menu>
+
+<!-- em -->
+<em>Emphasis</em>
+
+<!-- embed -->
+<embed type="video/quicktime" src="movie.mov" width="640" height="480"></embed>
+
+<!-- fieldset -->
+<form action="test.php" method="post">
+  <fieldset>
+    <legend>Title</legend>
+    <input type="radio" name="radio" id="radio"> <label for="radio">Click me</label>
+  </fieldset>
+</form>
+
+<!-- figure, figcaption -->
+<figure>
+	<img src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png" alt="An awesome picture">
+</figure>
+<p></p>
+<figure>
+	<img src="https://developer.cdn.mozilla.net/media/img/mdn-logo-sm.png" alt="An awesome picture">
+	<figcaption>Caption for the awesome picture</figcaption>
+</figure>
+
+<!-- footer -->
+<footer>
+  Some copyright info or perhaps some author info for an &lt;article&gt;?
+</footer>
+
+<!-- form -->
+<form action="">
+  <label for="GET-name">Name:</label>
+  <input id="GET-name" type="text" name="name">
+  <input type="submit" value="Save">
+</form>
+<form action="" method="post">
+  <label for="POST-name">Name:</label>
+  <input id="POST-name" type="text" name="name">
+  <input type="submit" value="Save">
+</form>
+<form action="" method="post">
+  <fieldset>
+    <legend>Title</legend>
+    <input type="radio" name="radio" id="radio"> <label for="radio">Click me</label>
+  </fieldset>
+</form>
+
+<!-- headings -->
+<h1>Heading level 1</h1>
+<h2>Heading level 2</h2>
+<h3>Heading level 3</h3>
+<h4>Heading level 4</h4>
+<h5>Heading level 5</h5>
+<h6>Heading level 6</h6>
+
+<h1>Heading elements</h1>
+<h2>Summary</h2>
+<p>Some text here...</p>
+
+<h2>Examples</h2>
+<h3>Example 1</h3>
+<p>Some text here...</p>
+
+<h3>Example 2</h3>
+<p>Some text here...</p>
+
+<h2>See also</h2>
+<p>Some text here...</p>
+
+<!-- header -->
+<header>
+  Header
+</header>
+
+<!-- hr -->
+<hr>
+
+<!-- i -->
+<i>Italic</i>
+
+<!-- iframe -->
+<base target="_blank" />
+<iframe width="400" height="215" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+   src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=es-419&amp;geocode=&amp;q=buenos+aires&amp;sll=37.0625,-95.677068&amp;sspn=38.638819,80.859375&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Buenos+Aires,+Argentina&amp;z=11&amp;ll=-34.603723,-58.381593&amp;output=embed">
+</iframe><br />
+<small>
+    <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=es-419&amp;geocode=&amp;q=buenos+aires&amp;sll=37.0625,-95.677068&amp;sspn=38.638819,80.859375&amp;t=h&amp;ie=UTF8&amp;hq=&amp;hnear=Buenos+Aires,+Argentina&amp;z=11&amp;ll=-34.603723,-58.381593"
+       style="color:#0000FF;text-align:left">
+        See bigger map
+    </a>
+</small>
+
+<!-- img -->
+<img src="mdn-logo-sm.png" alt="MD Logo" />
+<a href="https://developer.mozilla.org/"><img src="mdn-logo-sm.png" alt="MDN Logo" /> </a>
+<img src="mdn-logo-sm.png" alt="MD Logo" srcset="mdn-logo-HD.png 2x, mdn-logo-small.png 15w, mdn-banner-HD.png 100w 2x" />
+
+<!-- input -->
+<input type="email" x-moz-errormessage="Please specify a valid email address.">
+<form action="getform.php" method="get">
+    First name: <input type="text" name="first_name" /><br />
+     Last name: <input type="text" name="last_name" /><br />
+        E-mail: <input type="email" name="user_email" /><br />
+<input type="submit" value="Submit" />
+</form>
+
+<input value="defalut" type="text" mozactionhint="next" name="sometext" />
+<input value="defalut" type="button">
+<input value="defalut" type="tel">
+<input value="defalut" type="text">
+<input value="defalut" type="time">
+<input value="defalut" type="search">
+<input value="defalut" type="week">
+<input value="defalut" type="url">
+<input value="defalut" type="submit">
+<input value="defalut" type="reset">
+<input value="defalut" type="range">
+<input value="defalut" type="radio">
+<input value="defalut" type="password">
+<input value="defalut" type="month">
+<input value="defalut" type="image">
+<input value="defalut" type="date">
+<input value="defalut" type="datetime">
+<input value="defalut" type="datetime-local">
+<input value="defalut" type="color">
+<input value="defalut" type="checkbox">
+<input value="defalut" type="file">
+<input value="defalut">
+
+<!-- ins -->
+<ins>This text has been inserted</ins>
+
+<!-- kbd -->
+<p>Type the following in the Run dialog: <kbd>cmd</kbd><br />Then click the OK button.</p>
+
+<p>Save the document by pressing <kbd><kbd>Ctrl</kbd>+<kbd>S</kbd></kbd></p>
+
+<!-- keygen -->
+<keygen name="name" challenge="challenge string" keytype="type" keyparams="pqg-params">
+
+<!-- label -->
+<label>Click me</label><input type="text" id="User" name="Name" />
+
+<!-- li, ol, ul -->
+<ol>
+    <li>first item</li>
+    <li>second item</li>
+    <li>third item</li>
+</ol>
+
+<ul>
+    <li>first item</li>
+    <li>second item</li>
+    <li>third item</li>
+</ul>
+
+<ul>
+    <li><ul>
+            <li><ul>
+                    <li><ul>
+                            <li><ul>
+                                    <li>first item</li>
+                                    <li>second item</li>
+                                    <li>third item</li>
+                                </ul></li>
+                            <li>second item</li>
+                            <li>third item</li>
+                        </ul></li>
+                    <li>second item</li>
+                    <li>third item</li>
+                </ul></li>
+            <li>second item</li>
+            <li>third item</li>
+        </ul></li>
+    <li>second item</li>
+    <li>third item</li>
+</ul>
+
+<ol>
+    <li><ol>
+            <li><ol>
+                    <li><ol>
+                            <li><ol>
+                                    <li><ol>
+                                            <li>first</li>
+                                            <li>second item</li>
+                                            <li>third item</li>
+                                        </ol></li>
+                                    <li>second item</li>
+                                    <li>third item</li>
+                                </ol></li>
+                            <li>second item</li>
+                            <li>third item</li>
+                        </ol></li>
+                    <li>second item</li>
+                    <li>third item</li>
+                </ol></li>
+            <li>second item</li>
+            <li>third item</li>
+        </ol></li>
+    <li>second item</li>
+    <li>third item</li>
+</ol>
+
+<!-- main -->
+<main>
+  <h1>Apples</h1>
+  <p>The apple is the pomaceous fruit of the apple tree.</p>
+
+  <article>
+    <h2>Red Delicious</h2>
+    <p>These bright red apples are the most common found in many
+    supermarkets.</p>
+    <p>... </p>
+    <p>... </p>
+  </article>
+
+  <article>
+    <h2>Granny Smith</h2>
+    <p>These juicy, green apples make a great filling for
+    apple pies.</p>
+    <p>... </p>
+    <p>... </p>
+  </article>
+
+</main>
+
+<!-- mark -->
+<p>The &lt;mark&gt; element is used to <mark>highlight</mark> text</p>
+
+<!-- menu -->
+<menu>
+  <li>
+    <button type="menu" value="File" menu="file-menu"></button>
+    <menu type="popup" id="file-menu">
+      <menuitem label="New..." onclick="newFile()"></menuitem>
+      <menuitem label="Save..." onclick="saveFile()"></menuitem>
+    </menu>
+  </li>
+  <li>
+    <button type="menu" value="Edit" menu="edit-menu"></button>
+    <menu type="popup" id="edit-menu">
+      <menuitem label="Cut..." onclick="cutEdit()"></menuitem>
+      <menuitem label="Copy..." onclick="copyEdit()"></menuitem>
+      <menuitem label="Paste..." onclick="pasteEdit()"></menuitem>
+    </menu>
+  </li>
+</menu>
+
+<!-- menuitem -->
+<menuitem type="command" label="Save" icon="icons/save.png" onclick="save()">
+
+<!-- meter -->
+<p>Heat the oven to <meter min="200" max="500" value="350">350 degrees</meter>.</p>
+<p>He got a <meter low="69" high="80" max="100" value="84">B</meter> on the exam.</p>
+
+<!-- nav -->
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- object -->
+<object data="move.swf" type="application/x-shockwave-flash"></object>
+<object data="move.swf" type="application/x-shockwave-flash">
+  <param name="foo" value="bar">
+</object>
+
+<!-- optgroup -->
+<select>
+  <optgroup label="Group 1">
+    <option>Option 1.1</option>
+  </optgroup>
+  <optgroup label="Group 2">
+    <option>Option 2.1</option>
+    <option>Option 2.2</option>
+  </optgroup>
+  <optgroup label="Group 3" disabled>
+    <option>Option 3.1</option>
+    <option>Option 3.2</option>
+    <option>Option 3.3</option>
+  </optgroup>
+</select>
+
+<!-- output -->
+<form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
+    <input type="range" name="b" value="50" /> +
+    <input type="number" name="a" value="10" /> =
+    <output name="result"></output>
+</form>
+
+<!-- pre -->
+<pre>
+body {
+  color:red;
+}
+</pre>
+
+<!-- progress -->
+<progress value="70" max="100">70 %</progress>
+
+
+<!-- q -->
+<p>Everytime Kenny is killed, Stan will announce
+   <q cite="http://en.wikipedia.org/wiki/Kenny_McCormick#Cultural_impact">
+     Oh my God, you/they killed Kenny!
+   </q>.
+</p>
+
+<!-- ruby -->
+<ruby>
+  漢 <rp>(</rp><rt>Kan</rt><rp>)</rp>
+  字 <rp>(</rp><rt>ji</rt><rp>)</rp>
+</ruby>
+
+<ruby>
+  漢 <rt>Kan</rt>
+  字 <rt>ji</rt>
+</ruby>
+
+<!-- s -->
+<s>Today's Special: Salmon</s>
+
+<!-- samp -->
+<p>Regular text. <samp>This is sample text.</samp> Regular text.</p>
+
+<!-- section -->
+<section>
+  <h1>Heading</h1>
+  <p>Bunch of awesome content</p>
+</section>
+
+<!-- select -->
+<select name="select">
+  <option value="value1">Value 1</option>
+  <option value="value2" selected>Value 2</option>
+  <option value="value3">Value 3</option>
+</select>
+
+<select name="select">
+  <optgroup label="one">
+    <option value="value1">Value 1</option>
+    <option value="value2" selected>Value 2</option>
+    <option value="value3">Value 3</option>
+  </optgroup>
+  <option value="value3">Value 3</option>
+  <optgroup label="two">
+      <option value="value1">Value 1</option>
+      <option value="value2" selected>Value 2</option>
+      <option value="value3">Value 3</option>
+    </optgroup>
+</select>
+
+<!-- sub -->
+<p>The chemical formula of water is H<sub>2</sub>O</p>
+
+<!-- sup -->
+<p>This text is <sup>superscripted</sup></p>
+
+<!-- table -->
+<p>Simple table with header</p>
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+  </tr>
+  <tr>
+    <td>Jane</td>
+    <td>Doe</td>
+  </tr>
+</table>
+
+<p>Table with thead, tfoot, and tbody</p>
+<table>
+  <thead>
+    <tr>
+      <th>Header content 1</th>
+      <th>Header content 2</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>Footer content 1</td>
+      <td>Footer content 2</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>Body content 1</td>
+      <td>Body content 2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table with colgroup</p>
+<table>
+  <colgroup span="4" class="columns"></colgroup>
+  <tr>
+    <th>Countries</th>
+    <th>Capitals</th>
+    <th>Population</th>
+    <th>Language</th>
+  </tr>
+  <tr>
+    <td>USA</td>
+    <td>Washington D.C.</td>
+    <td>309 million</td>
+    <td>English</td>
+  </tr>
+  <tr>
+    <td>Sweden</td>
+    <td>Stockholm</td>
+    <td>9 million</td>
+    <td>Swedish</td>
+  </tr>
+</table>
+
+<p>Table with colgroup and col</p>
+<table>
+  <colgroup>
+    <col class="column1">
+    <col class="columns2plus3" span="2">
+  </colgroup>
+  <tr>
+    <th>Lime</th>
+    <th>Lemon</th>
+    <th>Orange</th>
+  </tr>
+  <tr>
+    <td>Green</td>
+    <td>Yellow</td>
+    <td>Orange</td>
+  </tr>
+</table>
+
+<p>Simple table with caption</p>
+<table>
+  <caption>Awesome caption</caption>
+  <tr>
+    <td>Awesome data</td>
+  </tr>
+</table>
+
+<!-- template -->
+<table id="producttable">
+  <thead>
+    <tr>
+      <td>UPC_Code</td>
+      <td>Product_Name</td>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- existing data could optionally be included here -->
+  </tbody>
+</table>
+
+<template id="productrow">
+  <tr>
+    <td class="record"></td>
+    <td></td>
+  </tr>
+</template>
+
+<!-- textarea -->
+<textarea name="textarea" rows="10" cols="50">Write something here</textarea>
+
+<!-- time -->
+<p>The concert starts at <time>20:00</time>.</p>
+<p>The concert took place on <time datetime="2001-05-15 19:00">May 15</time>.</p>
+
+<!-- track -->
+<video controls>
+   <source src="sample.ogv" type="video/ogv">
+   <track kind="captions" src="sampleCaptions.srt" srclang="en">
+   <track kind="descriptions" src="sampleDesciptions.srt" srclang="en">
+   <track kind="chapters" src="sampleChapters.srt" srclang="en">
+   <track kind="subtitles" src="sampleSubtitles_de.srt" srclang="de">
+   <track kind="subtitles" src="sampleSubtitles_en.srt" srclang="en">
+   <track kind="subtitles" src="sampleSubtitles_ja.srt" srclang="ja">
+   <track kind="subtitles" src="sampleSubtitles_oz.srt" srclang="oz">
+   <track kind="metadata" src="keyStage1.srt" srclang="en" label="Key Stage 1">
+   <track kind="metadata" src="keyStage2.srt" srclang="en" label="Key Stage 2">
+   <track kind="metadata" src="keyStage3.srt" srclang="en" label="Key Stage 3">
+</video>
+
+<!-- var -->
+<p> A simple equation: <var>x</var> = <var>y</var> + 2 </p>
+
+<!-- video -->
+<video src="videofile.ogg" autoplay poster="posterimage.jpg">
+  Sorry, your browser doesn't support embedded videos,
+  but don't worry, you can <a href="videofile.ogg">download it</a>
+  and watch it with your favorite video player!
+</video>
+<video src="foo.ogg">
+  <track kind="subtitles" src="foo.en.vtt" srclang="en" label="English">
+  <track kind="subtitles" src="foo.sv.vtt" srclang="sv" label="Svenska">
+</video>
+
+<!-- wbr -->
+<p>http://this<wbr>.is<wbr>.a<wbr>.really<wbr>.long<wbr>.example<wbr>.com/With<wbr>/deeper<wbr>/level<wbr>/pages<wbr>/deeper<wbr>/level<wbr>/pages<wbr>/deeper<wbr>/level<wbr>/pages<wbr>/deeper<wbr>/level<wbr>/pages<wbr>/deeper<wbr>/level<wbr>/pages</p>
+```
