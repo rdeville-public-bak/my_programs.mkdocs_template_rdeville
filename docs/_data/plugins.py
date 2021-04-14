@@ -447,25 +447,48 @@ def load_yaml_file(path: str, filename: str) -> None:
     return schema.source, data_type
 
 
-def update_subrepo_logo_src(env:dict,curr_repo:dict,repo_name:str,subrepo_dict:dict, path:str,external:bool) -> None:
+def update_subrepo_logo_src(
+    env: dict,
+    curr_repo: dict,
+    repo_name: str,
+    subrepo_dict: dict,
+    path: str,
+    external: bool,
+    latest: str
+) -> None:
+    """
+    @rdeville: TODO
+    """
+
     logo_subpath = ""
     src_subpath = ""
+
     if external:
         logo_subpath = os.path.join(subrepo_dict["online_url"])
 
-    src_subpath = os.path.join(path.replace(f"{env.project_dir}/",""),repo_name)
+    if latest:
+        logo_subpath = os.path.join(logo_subpath,latest)
+
+    src_subpath = os.path.join(
+        path.replace(f"{env.project_dir}/", ""), repo_name
+    )
 
     if "logo" not in curr_repo:
-        curr_repo["logo"] = os.path.join(logo_subpath, "assets", "img", "meta",f"{repo_name}_logo.png")
+        curr_repo["logo"] = os.path.join(
+            logo_subpath, "assets", "img", "meta", f"{repo_name}_logo.png"
+        )
     if "src_path" in curr_repo:
         for i_src in curr_repo["src_path"]:
             i_src = os.path.join(src_subpath, i_src)
             env.conf["plugins"]["mkdocstrings"].config.data["handlers"][
                 "python"
             ]["setup_commands"].append(f"sys.path.append('{i_src}')")
+    print(yaml.dump(curr_repo))
 
 
-def update_subrepo_info(env: dict, subrepo_list: dict, path: str, external:bool = False) -> dict:
+def update_subrepo_info(
+    env: dict, subrepo_list: dict, path: str, external: bool = False
+) -> dict:
     """
     @rdeville TODO
     """
@@ -483,7 +506,24 @@ def update_subrepo_info(env: dict, subrepo_list: dict, path: str, external:bool 
             print(
                 f"{INFO_CLR}INFO [macros] - Cloning repo {i_repo['name']}{RESET_CLR}"
             )
-            git.Repo.clone_from(i_repo["git_url"], subrepo_root)
+            git_subrepo = git.Repo.clone_from(i_repo["git_url"], subrepo_root)
+
+        latest = ""
+        if git_subrepo.tags:
+            last_major = 0
+            last_minor = 0
+            for i_tag in git_subrepo.tags:
+                i_tag = yaml.dump(i_tag.path)
+                i_tag = re.sub(".*v", "", i_tag).split(".")
+                major = int(i_tag[0])
+                minor = int(i_tag[1])
+                if major > last_major:
+                    last_major = major
+                    last_minor = 0
+                if minor > last_minor:
+                    last_minor = minor
+                    last_patch = 0
+            latest = f"{last_major}.{last_minor}"
 
         if "subpath" in i_repo:
             data_dir = os.path.join(
@@ -496,12 +536,16 @@ def update_subrepo_info(env: dict, subrepo_list: dict, path: str, external:bool 
         data, _ = load_yaml_file(data_dir, data_file)
         for i_repo_info in data:
             curr_repo = data[i_repo_info]
-            update_subrepo_logo_src(env,curr_repo,i_repo_info,i_repo,path,external)
+            update_subrepo_logo_src(
+                env, curr_repo, i_repo_info, i_repo, path, external, latest
+            )
         return_dict.update(data)
     return return_dict
 
 
-def update_subrepo(env: dict, subrepo_dict: dict, path: str, external:bool) -> dict:
+def update_subrepo(
+    env: dict, subrepo_dict: dict, path: str, external: bool
+) -> dict:
     """
     @rdeville TODO
     """
@@ -513,31 +557,37 @@ def update_subrepo(env: dict, subrepo_dict: dict, path: str, external:bool) -> d
             elif i_key == "internal":
                 env.variables["internal_subdoc"] = True
             return_dict.update(
-                update_subrepo_info(env, subrepo_dict[i_key], path,external)
+                update_subrepo_info(env, subrepo_dict[i_key], path, external)
             )
         elif i_key not in ["nav_entry"]:
             return_dict.update(
                 update_subrepo(
-                    env, subrepo_dict[i_key], os.path.join(path, i_key),external
+                    env,
+                    subrepo_dict[i_key],
+                    os.path.join(path, i_key),
+                    external,
                 )
             )
     return return_dict
 
 
-def update_logo_src_repo(env:dict,curr_repo:dict,repo_name:str,path:str=None) -> None:
+def update_logo_src_repo(
+    env: dict, curr_repo: dict, repo_name: str, path: str = None
+) -> None:
     subpath = ""
     if path:
-        subpath = os.path.join(path.replace(env.project_dir,""),repo_name)
+        subpath = os.path.join(path.replace(env.project_dir, ""), repo_name)
 
     if "logo" not in curr_repo:
-        curr_repo["logo"] = os.path.join(subpath, "assets", "img", "meta",f"{repo_name}_logo.png")
+        curr_repo["logo"] = os.path.join(
+            subpath, "assets", "img", "meta", f"{repo_name}_logo.png"
+        )
     if "src_path" in curr_repo:
         for i_src in curr_repo["src_path"]:
             i_src = os.path.join(subpath, i_src)
             env.conf["plugins"]["mkdocstrings"].config.data["handlers"][
                 "python"
             ]["setup_commands"].append(f"sys.path.append('{i_src}')")
-
 
 
 def load_var_file(env: dict) -> None:
@@ -556,7 +606,7 @@ def load_var_file(env: dict) -> None:
             data, data_type = load_yaml_file(var_dir, i_file)
             for i_key in data:
                 if data_type == "repo":
-                    update_logo_src_repo(env,data[i_key],i_key)
+                    update_logo_src_repo(env, data[i_key], i_key)
                 env.variables[i_key] = data[i_key]
 
 
@@ -644,7 +694,9 @@ def define_env(env: dict) -> None:
     if "subrepo" in env.variables:
         env.variables["internal_subdoc"] = False
         env.variables.update(
-            update_subrepo(env, env.variables["subrepo"], env.project_dir, False)
+            update_subrepo(
+                env, env.variables["subrepo"], env.project_dir, False
+            )
         )
 
     set_config(env)
