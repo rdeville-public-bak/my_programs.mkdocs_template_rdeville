@@ -1,7 +1,4 @@
 ---
-### BEGIN MKDOCS TEMPLATE ###
-### WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !###
-### Modified content will be overwritten when updating.###
 # GLOBAL CONFIGURATION
 # =============================================================================
 # YAML Anchors
@@ -64,24 +61,6 @@ variables:
       bash
       git
       gcc
-      musl-dev
-      jpeg-dev
-      zlib-dev
-      libffi-dev
-      cairo-dev
-      pango-dev
-      gdk-pixbuf
-      jpeg-dev
-      zlib-dev
-      freetype-dev
-      lcms2-dev
-      openjpeg-dev
-      tiff-dev
-      tk-dev
-      tcl-dev
-      harfbuzz-dev
-      fribidi-dev
-      chromium
   # Create virtual environment
   - virtualenv .venv
   # Activate virtual environment
@@ -104,7 +83,7 @@ variables:
   # Start the SSH agent
   - eval $(ssh-agent -s)
   # Add the private SSH key to be able to connect to the perso LIRIS website
-  - echo "${SSH_PRIVATE_KEY}" | tr -d '' | ssh-add -
+  - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
 
 .before_script_export_variable: &before_script_export_variable
   # Update values of some variables depending on the CI_DEPLOY_TYPE
@@ -166,7 +145,7 @@ variables:
         fi
       ;;
       *)
-        echo -e "[31mERROR - Variable \`CI_DEPLOY_TYPE\` is not defined !"
+        echo -e "\e[31mERROR - Variable \`CI_DEPLOY_TYPE\` is not defined !"
         return 1
       ;;
     esac
@@ -196,11 +175,11 @@ variables:
 .only_dev: &only_dev
   only:
     refs:
-      -  *ref_release
-      -  *ref_feature
-      -  *ref_hotfix
-      -  *ref_bugfix
-      -  *ref_merge_requests
+      - *ref_release
+      - *ref_feature
+      - *ref_hotfix
+      - *ref_bugfix
+      - *ref_merge_requests
 
 # Jobs under only_pre_prod anchor will be run on `develop` (i.e. pre-release)
 # and `master` (release) branch.
@@ -307,31 +286,31 @@ variables:
     - |
       if [[ -z "${SSH_KNOWN_HOSTS}" ]]
       then
-        echo -e "[31mERROR - Variable \`SSH_KNOWN_HOSTS_${CI_DEPLOY_TYPE})\` is not defined !"
+        echo -e "\e[31mERROR - Variable \`SSH_KNOWN_HOSTS_${CI_DEPLOY_TYPE})\` is not defined !"
         export ERROR="true"
       fi
     - |
       if [[ -z "${SSH_PRIVATE_KEY}" ]]
       then
-        echo -e "[31mERROR - Variable \`SSH_PRIVATE_KEY_${CI_DEPLOY_TYPE}\` is not defined !"
+        echo -e "\e[31mERROR - Variable \`SSH_PRIVATE_KEY_${CI_DEPLOY_TYPE}\` is not defined !"
         export ERROR="true"
       fi
     - |
       if [[ -z "${ONLINE_DEST}" ]]
       then
-        echo -e "[31mERROR - Variable \`ONLINE_DEST_${CI_DEPLOY_TYPE}\` is not defined !"
+        echo -e "\e[31mERROR - Variable \`ONLINE_DEST_${CI_DEPLOY_TYPE}\` is not defined !"
         export ERROR="true"
       fi
     - |
       if [[ -z "${RSYNC_DEST}" ]]
       then
-        echo -e "[31mERROR - Variable \`RSYNC_DEST_${CI_DEPLOY_TYPE}\` is not defined !"
+        echo -e "\e[31mERROR - Variable \`RSYNC_DEST_${CI_DEPLOY_TYPE}\` is not defined !"
         export ERROR="true"
       fi
     - |
       if [[ "${ERROR}" == "true" ]]
       then
-        echo -e "[31mERROR - At least one required variable is not defined !"
+        echo -e "\e[31mERROR - At least one required variable is not defined !"
         return 1
       fi
 
@@ -369,11 +348,14 @@ test_build_local:
     # Install python test requirements
     - pip3 install -r requirements.docs.txt
     # Build local documentation
-    -  mkdocs build -f mkdocs.local.yml -d site_local
+    - mkdocs build -f mkdocs.local.yml -d site_local
     # If everything went right, remove build site
     - rm -rf site_local
+  rules:
+    - exists:
+      - mkdocs.local.yaml
 
-test_build_monorepo:
+test_build:
   <<: *tag_docker
   <<: *image_docker
   <<: *cache_python
@@ -384,7 +366,7 @@ test_build_monorepo:
     # Install python test requirements
     - pip3 install -r requirements.docs.txt
     # Build local documentation
-    -  mkdocs build -d site_monorepo
+    - mkdocs build -d site_monorepo
     # If everything went right, remove build site
     - rm -rf site_monorepo
 
@@ -406,25 +388,6 @@ build_html:
     paths:
       - site/
 
-build_pdf:
-  before_script:
-    - *before_script_python_dependencies
-  <<: *tag_docker
-  <<: *image_docker
-  <<: *cache_python_pull
-  <<: *stage_build
-  script:
-    # Install python documentations requirements
-    - pip3 install -r requirements.docs.txt
-    # Export a variable to build the PDF of the documentation
-    - export ENABLE_PDF_EXPORT=1
-    # Build the documentation
-    - mkdocs build
-    - cp docs/versions.json site/
-  artifacts:
-    paths:
-      - docs/docs.pdf
-
 # Jobs in deploy stage
 # -----------------------------------------------------------------------------
 # Template jobs script deploy previously built html documentation.
@@ -445,25 +408,29 @@ build_pdf:
     - export RSYNC_PATH="/${PROJECT_PATH}${LAST_TAG}"
     - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}${LAST_TAG}"
     - mkdir -p "tmp/${RSYNC_PATH}"
-    - cp site/versions.json versions.json
+    - |
+      if [[ -f "site/versions.json" ]]
+      then
+        cp site/versions.json versions.json
+      fi
     - mv site/* "tmp/${RSYNC_PATH}/"
     - rsync -avz "tmp/" "${RSYNC_DEST}"
     - echo -e "
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset='utf-8'>
-        <title>Redirecting</title>
-        <noscript>
-          <meta http-equiv='refresh' content='1; url=${ONLINE_PATH}' />
-        </noscript>
-        <script>
-          window.location.replace('${ONLINE_PATH}');
-        </script>
-      </head>
-      <body>
-        Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...
-      </body>
+      <!DOCTYPE html>\n
+      <html>\n
+      <head>\n
+        <meta charset='utf-8'>\n
+        <title>Redirecting</title>\n
+        <noscript>\n
+          <meta http-equiv='refresh' content='1; url=${ONLINE_PATH}' />\n
+        </noscript>\n
+        <script>\n
+          window.location.replace('${ONLINE_PATH}');\n
+        </script>\n
+      </head>\n
+      <body>\n
+        Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...\n
+      </body>\n
       </html>" > index.html
     - rsync -avz index.html "${RSYNC_DEST}${PROJECT_PATH}/"
     - rsync -avz versions.json "${RSYNC_DEST}${PROJECT_PATH}/"
@@ -472,7 +439,7 @@ deploy_html_dev:
   <<: *script_deploy_html
   <<: *only_dev
   variables:
-    CI_DEPLOY_TYPE: "PRE_PROD"
+    CI_DEPLOY_TYPE: "DEV"
     PROJECT_PATH: ${CI_COMMIT_REF_NAME%-*}/$CI_PROJECT_PATH/
 
 deploy_html_pre_prod:
@@ -484,43 +451,6 @@ deploy_html_pre_prod:
 
 deploy_html_prod:
   <<: *script_deploy_html
-  <<: *only_prod
-  variables:
-    CI_DEPLOY_TYPE: "PROD"
-    PROJECT_PATH: ${CI_COMMIT_REF_NAME%-*}/$CI_PROJECT_PATH/
-
-.script_deploy_pdf: &script_deploy_pdf
-  <<: *tag_docker
-  <<: *image_docker
-  <<: *cache_python
-  <<: *stage_deploy
-  needs:
-    - build_pdf
-  before_script:
-    - *before_script_export_variable
-    - *before_script_prepare_deployment
-  script:
-    - mkdir -p "tmp/${CI_PROJECT_PATH}"
-    - mv "docs/docs.pdf" "tmp/${CI_PROJECT_PATH}/${CI_PROJECT_NAME}.pdf"
-    - rsync -avz "tmp/" "${RSYNC_DEST}"
-
-deploy_pdf_dev:
-  <<: *script_deploy_pdf
-  <<: *only_dev
-  variables:
-    CI_DEPLOY_TYPE: "DEV"
-    PROJECT_PATH: ${CI_COMMIT_REF_NAME%-*}/$CI_PROJECT_PATH/
-
-deploy_pdf_pre_prod:
-  <<: *script_deploy_pdf
-  <<: *only_pre_prod
-  variables:
-    CI_DEPLOY_TYPE: "PRE_PROD"
-    PROJECT_PATH: ${CI_COMMIT_REF_NAME%-*}/$CI_PROJECT_PATH/
-
-deploy_pdf_prod:
-  <<: *stage_deploy
-  <<: *script_deploy_pdf
   <<: *only_prod
   variables:
     CI_DEPLOY_TYPE: "PROD"
@@ -555,7 +485,7 @@ inform_triggers_variables:
     - |
       if [[ -z "${MAIN_PROJECT}" ]]
       then
-       echo -e "[32m
+       echo -e "\e[32m
           INFO - To trigger a main repo documentation CI, you can set \n
           INFO - variable \`MAIN_PROJECT\`. Otherwise, you have nothing\n
           INFO - to do. If the CI you want to run is not at the root of\n
@@ -564,8 +494,6 @@ inform_triggers_variables:
           INFO - the path to the file \`gitlab-ci.yaml\` to be run in  \n
           INFO - the \`MAIN_PROJECT\`."
       fi
-
-### END MKDOCS TEMPLATE ###
 
 # *****************************************************************************
 # VIM MODELINE
