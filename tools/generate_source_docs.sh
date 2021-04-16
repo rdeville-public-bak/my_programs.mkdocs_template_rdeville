@@ -21,6 +21,7 @@
 NODE_LIST=(
   "."
   "tools"
+  "user_config"
 )
 
 DRY_RUN="false"
