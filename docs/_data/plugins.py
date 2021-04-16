@@ -461,6 +461,24 @@ def set_repo_url(env: dict, repo_slug: str) -> None:
             )
 
 
+def set_nav(env: dict, repo_slug: str) -> None:
+    """Update content of the `nav` key in `env.conf`.
+
+    Update the value of `nav` key for mkdocs documentation based on (in
+    precedence order):
+
+    - Value of `nav` in `vars.yml` or `extra.yml` in `docs/_data/`, allowing
+      overloading of nav for forked repo.
+    - Value of `nav` in `mkdocs.yml`
+
+    Arguments:
+        env: Mkdocs macro plugin environment dictionary.
+        repo_slug: Repo slug or name of the repo folder.
+    """
+    if "nav" in env.variables and env.variables["nav"]:
+        env.conf["nav"] = env.variables["nav"]
+
+
 def update_theme(env: dict, repo_slug: str) -> None:
     """Update content of the `theme` key in `env.conf`.
 
@@ -526,6 +544,7 @@ def set_config(env: dict) -> None:
     set_copyright(env, git_repo)
     set_repo_name(env, repo_slug)
     set_repo_url(env, repo_slug)
+    set_nav(env, repo_slug)
     update_theme(env, repo_slug)
 
     if "subrepo" in env.variables:
@@ -568,7 +587,7 @@ def load_yaml_file(path: str, filename: str) -> None:
         schema.validate(raise_exception=True)
         data_content = schema.source
     else:
-        with open(filename) as file:
+        with open(source_file) as file:
             data_content = yaml.safe_load(file)
 
     return data_content, data_type
