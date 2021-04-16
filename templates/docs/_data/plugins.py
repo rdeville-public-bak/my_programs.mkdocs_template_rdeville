@@ -461,7 +461,7 @@ def set_repo_url(env: dict, repo_slug: str) -> None:
             )
 
 
-def set_nav(env: dict, repo_slug: str) -> None:
+def set_nav(env: dict) -> None:
     """Update content of the `nav` key in `env.conf`.
 
     Update the value of `nav` key for mkdocs documentation based on (in
@@ -473,7 +473,6 @@ def set_nav(env: dict, repo_slug: str) -> None:
 
     Arguments:
         env: Mkdocs macro plugin environment dictionary.
-        repo_slug: Repo slug or name of the repo folder.
     """
     if "nav" in env.variables and env.variables["nav"]:
         env.conf["nav"] = env.variables["nav"]
@@ -544,7 +543,7 @@ def set_config(env: dict) -> None:
     set_copyright(env, git_repo)
     set_repo_name(env, repo_slug)
     set_repo_url(env, repo_slug)
-    set_nav(env, repo_slug)
+    set_nav(env)
     update_theme(env, repo_slug)
 
     if "subrepo" in env.variables:
