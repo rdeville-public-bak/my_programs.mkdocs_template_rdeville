@@ -365,7 +365,7 @@ WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !
 Modified content will be overwritten when updating
 -->
 
-$(cat "${file_from}
+$(cat "${file_from}")
 
 ${end}"
     else
