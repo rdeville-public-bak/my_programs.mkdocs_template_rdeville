@@ -1,4 +1,4 @@
-{% set curr_repo=subs("mkdocs_template_rdeville") %}
+{% set curr_repo=subs("TODO") %}
 
 <!-- BEGIN MKDOCS TEMPLATE -->
 <!--
