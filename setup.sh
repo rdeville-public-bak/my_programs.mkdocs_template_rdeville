@@ -556,8 +556,9 @@ EOM
       esac
       begin="${prefix} ${begin_tag} ${suffix}"
       end="${prefix} ${end_tag} ${suffix}"
-      warning="${prefix} WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !${suffix}\n"
-      warning+="${prefix} Modified content will be overwritten when updating.${suffix}\n"
+      warning="\
+${prefix} WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !${suffix}
+${prefix} Modified content will be overwritten when updating.${suffix}"
 
       for i_file in "${tmp_file_from}" "${tmp_file_to}"
       do
@@ -571,11 +572,12 @@ EOM
       then
         if ! grep "${begin}" "${file_from}" &>/dev/null
         then
-          content="${begin}\n"
-          content+="${warning}\n"
-          content+="$(cat "${file_from}")"
-          content+="\n\n${end}"
-          echo -e "${content}" > "${tmp_file_from}"
+          content="\
+${begin}
+${warning}
+$(cat "${file_from}")
+${end}"
+          echo "${content}" > "${tmp_file_from}"
         else
           sed -n -e "/${begin_tag}/,/${end_tag}/"p "${file_from}" > "${tmp_file_from}"
         fi
@@ -591,6 +593,7 @@ EOM
           fi
           cp "${file_to}" "${bak_file}"
 
+          mkdocs_log "INFO" "AAAAAAA    Upgrading file **${relative_file_to}**."
           grep -B 1000000 "${begin}" "${file_to}" | sed -e "s/${begin}//g" > "${tmp_file_to}"
           cat "${tmp_file_from}" >> "${tmp_file_to}"
           grep -A 1000000 "${end}" "${file_to}" | sed -e "s/${end}//g" >> "${tmp_file_to}"
@@ -639,6 +642,8 @@ EOM
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
     local begin=""
     local end=""
+    local begin_tag="BEGIN MKDOCS TEMPLATE"
+    local end_tag="END MKDOCS TEMPLATE"
     local warning=""
     local prefix=""
     local suffix=""
@@ -661,17 +666,19 @@ EOM
             suffix="###"
           ;;
       esac
-      begin="${prefix} BEGIN MKDOCS TEMPLATE ${suffix}"
-      end="${prefix} END MKDOCS TEMPLATE ${suffix}"
-      warning="${prefix} WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !${suffix}\n"
-      warning+="${prefix} Modified content will be overwritten when updating.${suffix}\n"
+      begin="${prefix} ${begin_tag} ${suffix}"
+      end="${prefix} ${end_tag} ${suffix}"
+      warning="\
+${prefix} WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !${suffix}
+${prefix} Modified content will be overwritten when updating.${suffix}"
       if [[ -n "${prefix}" ]] && ! grep "${begin}" "${file_from}" &>/dev/null
       then
-        content="${begin}\n"
-        content+="${warning}\n"
-        content+="$(cat "${file_from}")"
-        content+="\n\n${end}"
-        echo -e "${content}" > "${file_to}"
+          content="\
+${begin}
+${warning}
+$(cat "${file_from}")
+${end}"
+        echo "${content}" > "${file_to}"
       else
         cp "${file_from}" "${file_to}"
       fi
