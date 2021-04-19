@@ -1,7 +1,6 @@
 ### BEGIN MKDOCS TEMPLATE ###
 ### WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !###
 ### Modified content will be overwritten when updating.###
-
 # Extra Data Information & Customization
 # ===========================================================================
 # Dictionnary storing variables to be used as "Jinja2" variables within
@@ -69,7 +68,7 @@
 # The base url of your site, e.g. if you are using multiple nested
 # documentation build with monorepo, you might want to share the same base URL
 # for all your repo, then build link from the repo["url_slug_with_namespace"].
-#site_url: "https://my_site.tld"
+site_base_url: "https://docs.romaindeville.fr"
 
 
 # Git platform
@@ -93,5 +92,4 @@ git_platform:
   # URL of the platform you use, to be able to set `repo_url` for mkdocs
   # configuration.
   url: "https://framagit.org/"
-
 ### END MKDOCS TEMPLATE ###
