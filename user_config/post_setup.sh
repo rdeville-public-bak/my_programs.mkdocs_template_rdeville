@@ -200,12 +200,10 @@ main_post_setup()
       repo_remote=${repo_remote##*@}
       repo_domain="https://${repo_remote%%:*}/"
       repo_with_namespace="${repo_remote##*:}"
-      repo_name_with_namespace="${repo_with_namespace%%.git}"
     else
       repo_domain=${repo_remote##https:\/\/}
       repo_domain="https://${repo_domain%%/*}/"
       repo_with_namespace="${repo_remote/${repo_domain}/}"
-      repo_name_with_namespace="${repo_with_namespace%%.git}"
     fi
     REPO_URL="${repo_domain}${repo_with_namespace/.git/}"
     REPO_NAME="${repo_with_namespace##*/}"
