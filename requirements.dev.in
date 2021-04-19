@@ -1,7 +1,6 @@
 ### BEGIN MKDOCS TEMPLATE ###
 ### WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !###
 ### Modified content will be overwritten when updating.###
-
 # DEVELOPER REQUIREMENTS
 # ============================================================
 # DESCRIPTION:
@@ -44,5 +43,4 @@ shellcheck-py
 # A linter for YAML files.
 # https://pypi.org/project/yamllint/
 yamllint
-
 ### END MKDOCS TEMPLATE ###
