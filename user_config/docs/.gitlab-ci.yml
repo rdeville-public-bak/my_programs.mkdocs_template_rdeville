@@ -113,8 +113,8 @@ variables:
   - &rules_regexp_dev $CI_COMMIT_BRANCH =~ /^((release|feature|hotfix|bugfix)-|merge_request_)*/
   - &rules_regexp_pre_prod $CI_COMMIT_BRANCH =~ /(develop|master)/
   - &rules_regexp_prod $CI_COMMIT_TAG
-  - &rules_regexp_trigger_main (($CI_COMMIT_BRANCH =~ /(develop|master)/) || $CI_COMMIT_TAG) && ($MAIN_PROJECT && $MAIN_PROJECT != $CI_PROJECT_PATH)
-  - &rules_regexp_trigger_info (($CI_COMMIT_BRANCH =~ /(develop|master)/) || $CI_COMMIT_TAG) && ($MAIN_PROJECT == "")
+  - &rules_regexp_trigger_main (($CI_COMMIT_BRANCH =~ /(develop|master)/) || $CI_COMMIT_TAG) && ($MAIN_PROJECT != null && $MAIN_PROJECT != $CI_PROJECT_PATH)
+  - &rules_regexp_trigger_info (($CI_COMMIT_BRANCH =~ /(develop|master)/) || $CI_COMMIT_TAG) && $MAIN_PROJECT == null
 
 # Defining rules that now replace only to run jobs under specific condition
 # and define variables
@@ -249,9 +249,9 @@ script_pre_test_ensure_variable: &script_pre_test_ensure_variable
         return 1
       fi
   rules:
-    - *rules_dev
-    - *rules_pre_prod
     - *rules_prod
+    - *rules_pre_prod
+    - *rules_dev
 
 # Jobs in test stage
 # -----------------------------------------------------------------------------
@@ -348,14 +348,13 @@ script_deploy_html: &script_deploy_html
       esac
     - export RSYNC_PATH="${PROJECT_PATH}${LAST_TAG}"
     - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}latest"
-    - |
-      if [[ -f "site/versions.json" ]]
-      then
-        cp site/versions.json versions.json
-        rsync -avz versions.json "${RSYNC_DEST}${PROJECT_PATH}/"
-      fi
     - mkdir -p "tmp/${RSYNC_PATH}"
     - mv site/* "tmp/${RSYNC_PATH}/"
+    - |
+      if [[ -f "tmp/${RSYNC_PATH}/versions.json" ]]
+      then
+        cp tmp/${RSYNC_PATH}/versions.json tmp/${RSYNC_PATH}/../versions.json
+      fi
     - ln -s "${LAST_TAG}" "latest"
     - mv "latest" "tmp/${PROJECT_PATH}"
     - rsync -avz "tmp/" "${RSYNC_DEST}"
@@ -378,9 +377,9 @@ script_deploy_html: &script_deploy_html
       </html>" > index.html
     - rsync -avz index.html "${RSYNC_DEST}${PROJECT_PATH}/"
   rules:
-    - *rules_dev
-    - *rules_pre_prod
     - *rules_prod
+    - *rules_pre_prod
+    - *rules_dev
 
 # Jobs in post_deploy stage
 # -----------------------------------------------------------------------------
