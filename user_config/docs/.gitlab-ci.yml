@@ -113,6 +113,8 @@ variables:
   - &rules_regexp_dev $CI_COMMIT_BRANCH =~ /^((release|feature|hotfix|bugfix)-|merge_request_)*/
   - &rules_regexp_pre_prod $CI_COMMIT_BRANCH =~ /(develop|master)/
   - &rules_regexp_prod $CI_COMMIT_TAG
+  - &rules_regexp_trigger_main (($CI_COMMIT_BRANCH =~ /(develop|master)/) || $CI_COMMIT_TAG) && ($MAIN_PROJECT && $MAIN_PROJECT != $CI_PROJECT_PATH)
+  - &rules_regexp_trigger_info (($CI_COMMIT_BRANCH =~ /(develop|master)/) || $CI_COMMIT_TAG) && ($MAIN_PROJECT == "")
 
 # Defining rules that now replace only to run jobs under specific condition
 # and define variables
@@ -130,6 +132,12 @@ variables:
   if: *rules_regexp_prod
   variables:
     CI_DEPLOY_TYPE: "prod"
+
+.rules_trigger_main: &rules_trigger_main
+  if: *rules_regexp_trigger_main
+
+.rules_trigger_info: &rules_trigger_info
+  if: *rules_regexp_trigger_info
 
 # Tag anchors
 # -----------------------------------------------------------------------------
@@ -340,7 +348,12 @@ script_deploy_html: &script_deploy_html
       esac
     - export RSYNC_PATH="${PROJECT_PATH}${LAST_TAG}"
     - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}latest"
-    - echo "$PROJECT_PATH"
+    - |
+      if [[ -f "site/versions.json" ]]
+      then
+        cp site/versions.json versions.json
+        rsync -avz versions.json "${RSYNC_DEST}${PROJECT_PATH}/"
+      fi
     - mkdir -p "tmp/${RSYNC_PATH}"
     - mv site/* "tmp/${RSYNC_PATH}/"
     - ln -s "${LAST_TAG}" "latest"
@@ -364,12 +377,6 @@ script_deploy_html: &script_deploy_html
       </body>\n
       </html>" > index.html
     - rsync -avz index.html "${RSYNC_DEST}${PROJECT_PATH}/"
-    - |
-      if [[ -f "site/versions.json" ]]
-      then
-        cp site/versions.json versions.json
-        rsync -avz versions.json "${RSYNC_DEST}${PROJECT_PATH}/"
-      fi
   rules:
     - *rules_dev
     - *rules_pre_prod
@@ -388,9 +395,7 @@ trigger_main_repo:
   variables:
     MAIN_PROJECT_CI_PATH: ${MAIN_PROJECT_CI_PATH:-"."}
   rules:
-    - *rules_pre_prod
-    - *rules_prod
-    - if: $MAIN_PROJECT && $MAIN_PROJECT != $CI_PROJECT_PATH
+    - *rules_trigger_main
 
 inform_triggers_variables:
   <<: *tag_docker
@@ -410,9 +415,7 @@ inform_triggers_variables:
           INFO - the \`MAIN_PROJECT\`."
       fi
   rules:
-    - *rules_pre_prod
-    - *rules_prod
-    - if: ! $MAIN_PROJECT
+    - *rules_trigger_info
 
 # *****************************************************************************
 # VIM MODELINE
