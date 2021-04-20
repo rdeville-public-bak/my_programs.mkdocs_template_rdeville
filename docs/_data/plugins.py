@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""
+"""Set of methods to manage mkdocs configuration dynamically.
+
 Set of methods for
 [mkdocs-macros-plugin](https://mkdocs-macros-plugin.readthedocs.io/) Set of
 which :
@@ -424,7 +425,6 @@ def set_repo_name(env: dict, repo_slug: str) -> None:
         env: Mkdocs macro plugin environment dictionary.
         repo_slug: Repo slug or name of the repo folder.
     """
-
     if "repo_name" not in env.conf or not env.conf["repo_name"]:
         if "repo_name" in env.variables:
             env.conf["repo_name"] = env.variables["repo_name"]
@@ -533,7 +533,6 @@ def set_config(env: dict) -> None:
     Arguments:
         env: Mkdocs macro plugin environment dictionary.
     """
-
     git_repo = git.Repo(search_parent_directories=True)
     repo_slug = get_repo_slug(env, git_repo)
 
@@ -557,7 +556,7 @@ def set_config(env: dict) -> None:
 
 
 def load_yaml_file(path: str, filename: str) -> None:
-    """Ensure a YAML file is valid again a schema and return its content
+    """Ensure a YAML file is valid again a schema and return its content.
 
     Depending on the name of the YAML file, compare its content to a schema to
     validate its content. If content is not valid, an error will be raised.
@@ -602,7 +601,7 @@ def update_subrepo_logo_src(
     path: str,
     external: bool,
 ) -> None:
-    """Update the content of the key `logo` and `src_path` of subrepo
+    """Update the content of the key `logo` and `src_path` of subrepo.
 
     Update value of keys `logo` and `src_path` of cloned subrepo, i.e. value
     from file `docs/_data/repo.yaml` in the cloned subrepo, relative to the main
@@ -740,7 +739,7 @@ def update_subrepo(
 def update_logo_src_repo(
     env: dict, curr_repo: dict, repo_name: str, path: str = None
 ) -> None:
-    """Update the content of the key `logo` and `src_path` of current repo
+    """Update the content of the key `logo` and `src_path` of current repo.
 
     Update value of keys `logo` and `src_path` of current repo holding the
     documentation.
@@ -753,7 +752,6 @@ def update_logo_src_repo(
         repo_name: Name of the repo,
         path: Absolute path of the location of the current repo.
     """
-
     subpath = ""
     if path:
         subpath = os.path.join(path.replace(env.project_dir, ""), repo_name)
@@ -771,7 +769,7 @@ def update_logo_src_repo(
 
 
 def load_var_file(env: dict) -> None:
-    """Load variables files in `docs/_data/`
+    """Load variables files in `docs/_data/`.
 
     Load every yaml files in `docs/_data/`, if one of the file define the
     current repo, then update keys `logo` and `src_path` for the current repo.
@@ -792,7 +790,7 @@ def load_var_file(env: dict) -> None:
 
 
 def update_version(env: dict) -> None:
-    """Parse every tags of the repo to build a `docs/versions.json`
+    """Parse every tags of the repo to build a `docs/versions.json`.
 
     To emulate mike version support for gitlab, this method will parse every
     tags of the current repo holding the current documentation to create a file
@@ -864,7 +862,8 @@ def update_version(env: dict) -> None:
 def define_env(env: dict) -> None:
     # pylint: disable=C0301
     # - C0301: Line to long
-    """
+    """Hook for mkdocs-macros-plugins defining variables, macros and filters.
+
     This is the hook for defining variables, macros and filters
 
     - variables: the dictionary that contains the environment variables
@@ -879,7 +878,6 @@ def define_env(env: dict) -> None:
     Arguments:
         env: Mkdocs macro plugin environment dictionary.
     """
-
     load_var_file(env)
 
     if "subrepo" in env.variables:
@@ -898,14 +896,28 @@ def define_env(env: dict) -> None:
     # pylint: disable=W0612
     # -  W0612: Unused variable (unused-variable)
     def subs(var: str) -> dict:
-        """Return the content of the dictionary defined by var"""
+        """Return the content of the dictionary defined by var.
+
+        Arguments:
+            var: Key in env.variables to return.
+
+        Returns:
+            The value of `env.variables[var]`.
+        """
         return env.variables[var]
 
     @env.macro
     # pylint: disable=W0612
     # -  W0612: Unused variable (unused-variable)
     def to_html(var: str) -> dict:
-        """Convert the content of the markdown string into HTML"""
+        """Convert the content of the markdown string into HTML.
+
+        Arguments:
+            var: Markdown string which need to be converted to HTML
+
+        Returns:
+            The content of the markdown converted to HTML
+        """
         return markdown.markdown(var)
 
 
