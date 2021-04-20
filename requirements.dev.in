@@ -1,3 +1,5 @@
+
+
 ### BEGIN MKDOCS TEMPLATE ###
 ### WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !###
 ### Modified content will be overwritten when updating.###
@@ -24,9 +26,9 @@ isort
 # https://pypi.org/project/pytest/
 pytest
 
-# Flake8 wrapper to make it nice and configurable
-# https://pypi.org/project/flake8/
-flakehell
+# Flake8 with pyproject support
+# https://pypi.org/project/flake9/
+flake9
 
 # python code static checker
 # https://pypi.org/project/pylint/
@@ -44,3 +46,5 @@ shellcheck-py
 # https://pypi.org/project/yamllint/
 yamllint
 ### END MKDOCS TEMPLATE ###
+
+
