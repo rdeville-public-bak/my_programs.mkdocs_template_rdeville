@@ -593,7 +593,7 @@ ${end}"
           fi
           cp "${file_to}" "${bak_file}"
 
-          mkdocs_log "INFO" "AAAAAAA    Upgrading file **${relative_file_to}**."
+          mkdocs_log "INFO" "Upgrading file **${relative_file_to}**."
           grep -B 1000000 "${begin}" "${file_to}" | sed -e "s/${begin}//g" > "${tmp_file_to}"
           cat "${tmp_file_from}" >> "${tmp_file_to}"
           grep -A 1000000 "${end}" "${file_to}" | sed -e "s/${end}//g" >> "${tmp_file_to}"
