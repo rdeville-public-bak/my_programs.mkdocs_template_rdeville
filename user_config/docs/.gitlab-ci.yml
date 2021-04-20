@@ -95,7 +95,7 @@ variables:
         export RSYNC_DEST="${RSYNC_DEST}/pre_prod/"
         export ONLINE_DEST="${ONLINE_DEST}/pre_prod/"
       ;;
-      "pre_prod")
+      "prod")
         export RSYNC_DEST="${RSYNC_DEST}/"
         export ONLINE_DEST="${ONLINE_DEST}/"
       ;;
@@ -357,7 +357,6 @@ script_deploy_html: &script_deploy_html
       fi
     - ln -s "${LAST_TAG}" "latest"
     - mv "latest" "tmp/${PROJECT_PATH}"
-    - rsync -avz "tmp/" "${RSYNC_DEST}"
     - echo -e "
       <!DOCTYPE html>\n
       <html>\n
@@ -374,8 +373,8 @@ script_deploy_html: &script_deploy_html
       <body>\n
         Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...\n
       </body>\n
-      </html>" > index.html
-    - rsync -avz index.html "${RSYNC_DEST}${PROJECT_PATH}/"
+      </html>" > tmp/${PROJECT_PATH}/../index.html
+    - rsync -avz "tmp/" "${RSYNC_DEST}"
   rules:
     - *rules_prod
     - *rules_pre_prod
