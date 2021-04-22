@@ -24,7 +24,7 @@
 # The name or company which old the copyright. No need to specify any date
 # as it will be built based on the first commit of your repo. If not specify,
 # then no copyright will be shown on the footer of the documentation.
-#copyright: "Firstname Lastname"
+copyright: "Romain Deville"
 
 # Name of your repo, if not specified, will be the key `mkdocs_repo_name` in
 # `_data/repo_name.yaml` If value is EXACTLY "!!git_platform", then the value
