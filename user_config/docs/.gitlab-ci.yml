@@ -17,8 +17,8 @@ workflow:
     # WIP, NO-CI or 🚧 (gitmoji for "work in progress", aka :construction:)
     - if: $CI_COMMIT_TITLE =~ /.*(WIP|NO-CI|🚧|:construction:).*/
       when: never
-    # Run the CI otherwise (depending on `rules` key per jobs)
-    - when: always
+    # Do not run CI if repo is not on framagit
+    - if: $CI_SERVER_HOST =~ /^framagit.org/
 
 # Stages jobs will pass through with anchors to avoid updating stage in multiple
 # place within this file. Now renaming a stage can be done directly after the
