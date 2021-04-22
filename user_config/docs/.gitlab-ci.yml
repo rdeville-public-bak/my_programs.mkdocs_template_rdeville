@@ -373,7 +373,7 @@ script_deploy_html: &script_deploy_html
       <body>\n
         Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...\n
       </body>\n
-      </html>" > tmp/${PROJECT_PATH}/../index.html
+      </html>" > tmp/${PROJECT_PATH}/index.html
     - rsync -Oavz "tmp/" "${RSYNC_DEST}"
   rules:
     - *rules_prod
