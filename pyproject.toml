@@ -1,6 +1,6 @@
 # No need for [build-system] as this pyproject.toml per PEP-518 as this file
 # serve to a centralized configuration file for development tools such as
-# black, flake8/flakehell, pylint, pycodestyle, etc.
+# black, flake8/flake9, pylint, pycodestyle, etc.
 [build-system]
 requires = [
   "setuptools",
@@ -45,9 +45,9 @@ commands =
         -not -path "./tmp/*" \
         -not -path "./site**/*"  \\) )'
   # Lint python files using flake8
-  flakehell lint
+  flake8
   # Ensure docstring convention (google is mkdocs rendering documentation)
-  pydocstyle --count --match-dir="(?![^\\.(docs)]).*" --convention=google
+  pydocstyle --count --convention=google --match-dir='[^(\\.|preview)].*'
 
 [testenv:format_shell]
 # Allow external commands
@@ -69,6 +69,7 @@ commands =
         -not -path "./python_venv/*" \\) ) '
   bash -c 'DIRENV_ROOT="$(pwd)" ./tools/generate_source_docs.sh --dry-run'
 
+
 [testenv:build_doc]
 # Allow external commands
 allowlist_externals=
@@ -89,6 +90,8 @@ commands =
       rm -rf site_monorepo; \
     fi'
 """
+
+
 
 
 ### BEGIN MKDOCS TEMPLATE ###
@@ -1086,34 +1089,22 @@ overgeneral-exceptions=["BaseException","Exception"]
 
 
 # -----------------------------------------------------------------------------
-# Flake8 wrapper to make it nice, legacy-friendly, configurable.
-# https://flakehell.readthedocs.io/config.html
-[tool.flakehell]
+# Flake8/flake9
+# https://flake8.pycqa.org/en/latest/user/configuration.html
+[tool.flake8]
   # Optionally inherit from remote config (or local if you want)
 #base=https://url.git.com/pyproject.toml
 
   # Specify any flake8 options.
   # Print the total number of errors.
   # Default False
-count=true
+count = true
 
   # Provide a comma-separated list of glob patterns to exclude from checks.
-exclude=[
-  ".git",
-  "__pycache__",
-  ".eggs",
-  ".venv",
-  ".direnv",
-  ".tox",
-  ".sha1",
-  "build",
-  "dist",
-  "docs",
-  "site"
-]
+exclude = ".git,__pycache__,.eggs,.env,.venv,.direnv,.tox,.sha1,build,dist,docs,site"
 
   # Provide a comma-separate list of glob patterns to include for checks.
-filename=[ "*.py" ]
+filename = "*.py"
 
   # Select the formatter used to display errors to the user.
   # This defaults to: default
@@ -1123,12 +1114,12 @@ filename=[ "*.py" ]
   #  - colored
   # The default formatter has a format string of:
   # '%(path)s:%(row)d:%(col)d: %(code)s %(text)s'
-format="grouped"
+#format="colored
 
   # Toggle whether pycodestyle should enforce matching the indentation of the
   # opening bracket’s line. When you specify this, it will prefer that you hang
   # the closing bracket rather than match the indentation.
-hang_closing=false
+hang-closing = false
 
   # Specify a list of codes to ignore. The list is expected to be comma-separated,
   # and does not need to specify an error code exactly. Since Flake8 3.0, this can
@@ -1137,8 +1128,9 @@ hang_closing=false
   # if you want to ignore all codes that start with W23 you need only specify W23
   # to ignore them. This also works for W2 and W (for example).
   # This defaults to: E121,E123,E126,E226,E24,E704
-  # REMARK: Not parsed by flakehell, use plugins
-#ignore=[ "E121", "E123", "E126", "E226", "E24", "E704"]
+ignore = "E121,E123,E126,E226,E24,E704,W503,E501"
+  # W503 : line break before binary operator
+  # E501 : line to long (already handled by black)
 
   # Set the maximum length that any line (with some exceptions) may be.
   # Exceptions include lines that are either strings or comments which are
@@ -1149,20 +1141,20 @@ hang_closing=false
   #   'http://...'
   # )
   # This defaults to: 79
-max_line_length=80
+max-line-length = 80
 
   # Report all errors, even if it is on the same line as a # NOQA comment. # NOQA
   # can be used to silence messages on specific lines. Sometimes, users will want
   # to see what errors are being silenced without editing the file. This option
   # allows you to see all the warnings, errors, etc. reported.
   # This default to : False
-disable_noqa=true
+disable-noqa = true
 
   # Print the source code generating the error/warning in question.
-show_source=true
+show-source = true
 
   # Count the number of occurrences of each error/warning code and print a report.
-statistics=true
+statistics = true
 
   # Enable off-by-default extensions.
   # Plugins to Flake8 have the option of registering themselves as off-by-default.
@@ -1178,13 +1170,10 @@ statistics=true
   # This defaults to: auto
   # The default behaviour will use the number of CPUs on your machine as reported
   # by multiprocessing.cpu_count().
-jobs="auto"
-
-  # Redirect all output to the specified file.
-output-file=".direnv/log/flakehell.log"
+jobs = "auto"
 
   # Also print output to stdout if output-file has been configured.
-tee=true
+tee = true
 
   # Provide a custom list of builtin functions, objects, names, etc.
   # This allows you to let pyflakes know about builtins that it may not
@@ -1198,7 +1187,7 @@ tee=true
 
   # Enable PyFlakes syntax checking of doctests in docstrings.
   # This is registered by the default PyFlakes plugin.
-#doctests=True
+#doctests = True
 
   # Specify which files are checked by PyFlakes for doctest syntax.
   # This is registered by the default PyFlakes plugin.
@@ -1208,20 +1197,13 @@ tee=true
 
   # Specify which files are not to be checked by PyFlakes for doctest syntax.
   # This is registered by the default PyFlakes plugin.
-  # exclude-in-doctest =
+#exclude-in-doctest =
   #  dir/subdir/file.py,
   #  dir/other/file.py
 
-[tool.flakehell.plugins]
-  # Python code style checker
-  # https://pypi.org/project/pycodestyle/
-pycodestyle=["-W503"]
-
-  # Passive checker of Python programs
-  # https://pypi.org/project/pyflakes/
-pyflakes=["+*"]
-
 ### END MKDOCS TEMPLATE ###
+
+
 
 
 # *****************************************************************************
