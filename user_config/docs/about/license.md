@@ -17,7 +17,7 @@ Software is under double licensing:
 
 ## MIT License
 
-Copyright (c) 2020
+{{ date_copyright }}
 
 {% for i_maintainer in curr_repo.maintainers %}
   - [{{ i_maintainer.name }}](mailto:{{ i_maintainer.mail }})
