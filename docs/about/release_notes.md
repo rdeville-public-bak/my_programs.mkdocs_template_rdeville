@@ -8,7 +8,14 @@ Modified content will be overwritten when updating
 
 <!-- END MKDOCS TEMPLATE -->
 
-## 🔖 v1.0.0 <small>(29/04/2021)</small>
+## 🔖 v1.0
+
+### 🔖 v1.0.1 <small>(29/04/2021)</small>
+
+- 🐛🍱 Fix wrong assets path in `docs/personal_template/create.md`
+- 🐛 Update `plugins.py` to latest release
+
+### 🔖 v1.0.0 <small>(29/04/2021)</small>
 
 First initial release of MkDocs Template
 
