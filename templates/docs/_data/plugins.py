@@ -401,13 +401,19 @@ def set_copyright(env: dict, git_repo: git.Repo) -> None:
             first_year = time.strftime("%Y", time.localtime())
         curr_year = time.strftime("%Y", time.localtime())
 
+        if first_year == curr_year:
+            env.variables[
+                "date_copyright"
+            ] = f"Copyright &copy; {curr_year}"
+        else:
+            env.variables[
+                "date_copyright"
+            ] = f"Copyright &copy; {curr_year} - {curr_year}"
+
         env.conf[
             "copyright"
-        ] = f"Copyright &copy; {first_year} - {curr_year} {env.variables['copyright']}"
+        ] = f"{env.variables['date_copyright']} {env.variables['copyright']}"
 
-        env.variables[
-            "full_copyright"
-        ] = f"Copyright &copy; {first_year} - {curr_year} {env.variables['copyright']}"
 
 
 def set_repo_name(env: dict, repo_slug: str) -> None:
