@@ -1,0 +1,33 @@
+# Minimal set of variable for subrepo example in usage/configure.md
+example:
+  my_repo_slug:
+    name: My Main Repo Name
+    desc: Description of my [Main Repo](#)
+  subrepo:
+    roles:
+      nav_entry: "Roles"
+      internal:
+        - name: role_name_1
+        - name: role_name_2
+      external:
+        - name: my_first_role
+    programs:
+      nav_entry: "My Programs"
+      external:
+        - name: my_first_repo
+        - name: my_second_repo
+role_name_1:
+  name: Role Name 1
+  desc: Description of the Role Name 1
+role_name_2:
+  name: Role Name 2
+  desc: Description of the Role Name 2
+my_first_role:
+  name: My First Role
+  desc: Description of My First Role
+my_first_repo:
+  name: My First Repo
+  desc: Description of My First Repo
+my_second_repo:
+  name: My Second Repo
+  desc: Description of My Second Repo
