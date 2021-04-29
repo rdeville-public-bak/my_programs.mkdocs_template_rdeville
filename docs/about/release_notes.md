@@ -10,6 +10,12 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.2 <small>(29/04/2021)</small>
+
+- 📝📄 Update copyright in license content
+- ✨ Improve handling of copyright in plugins.py script
+- 🔥 Remove useless file from tracked tree
+
 ### 🔖 v1.0.1 <small>(29/04/2021)</small>
 
 - 🐛🍱 Fix wrong assets path in `docs/personal_template/create.md`
