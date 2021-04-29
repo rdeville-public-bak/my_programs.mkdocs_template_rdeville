@@ -38,9 +38,9 @@ git clone git@gitdomain.tld:namespace/mkdocs_template.git.
 ```
 
 [mkdocs_template_repo]: {{ git_platform.url }}{{ curr_repo.git_slug_with_namespace }}
-[fork_mkdocs_template]: /assets/img/fork_main_repo.png
-[fork_mkdocs_template_dest]: /assets/img/fork_dest_namespace.png
-[fork_mkdocs_template_finish]: /assets/img/fork_finish.png
+[fork_mkdocs_template]: ../assets/img/fork_main_repo.png
+[fork_mkdocs_template_dest]: ../assets/img/fork_dest_namespace.png
+[fork_mkdocs_template_finish]: ../assets/img/fork_finish.png
 
 ## Add the content of your template
 
