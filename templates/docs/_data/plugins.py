@@ -405,6 +405,10 @@ def set_copyright(env: dict, git_repo: git.Repo) -> None:
             "copyright"
         ] = f"Copyright &copy; {first_year} - {curr_year} {env.variables['copyright']}"
 
+        env.variables[
+            "full_copyright"
+        ] = f"Copyright &copy; {first_year} - {curr_year} {env.variables['copyright']}"
+
 
 def set_repo_name(env: dict, repo_slug: str) -> None:
     """Update content of the `repo_name` key in `env.conf`.
