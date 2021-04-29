@@ -33,6 +33,6 @@ the custom template.
     ![!Custom Template Preview][custom_template_preview]
 
 [mkdocs_template_rdeville]: {{ git_platform.url }}{{ curr_repo.git_slug_with_namespace }}_rdeville
-[basic_template_preview]: /assets/img/basic_template_preview.png
-[custom_template_preview]: /assets/img/custom_template_preview.png
+[basic_template_preview]: ../assets/img/basic_template_preview.png
+[custom_template_preview]: ../assets/img/custom_template_preview.png
 
