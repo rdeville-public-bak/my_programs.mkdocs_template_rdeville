@@ -12,8 +12,8 @@
 
 --------------------------------------------------------------------------------
 
-Template to easily setup and managed [mkdocs][mkdocs] documentation in folder
-to have homogenous documentation.
+Mkdocs Templates scaffolding project to host documentation configuration
+and themes to manage homogenous documentation accros multiple projects.
 
 --------------------------------------------------------------------------------
 
@@ -49,13 +49,13 @@ projects.
 While [mkdocs][mkdocs] is a really usefull software allowing me to
 write clean and clear documentation in markdown and render it as static
 website, I was tired to always copy/paste same configuration accross all my
-projects documentations.
+project documentations.
 
 Even worst, when I decide to change some minor things (such as color palettes),
-I had to go to each projects and for each project I had to replace manually
+I had to go to each project and for each project I had to replace manually
 every time the same two configuration lines.
 
-This project aims is to ease the management of documentation configuration by
+This project aim is to ease the management of documentation configuration by
 allowing to create a template and easily setup or upgrade it to a newer
 version.
 
@@ -78,7 +78,7 @@ chmod +x /tmp/setup_mkdocs.sh
 ```
 
 Or if you already read the content of the script `setup.sh` at the root of this
-repo, previous commands can be done in online:
+repo, previous commands can be done in one line:
 
 ```
 # ASSUMING YOU ARE IN THE REPO FOR WHICH YOU WANT TO WRITE A DOCUMENTATION
@@ -169,4 +169,4 @@ You can now browse the full documentation by visiting
 
 <!-- END MKDOCS TEMPLATE -->
 
-[online_doc]: https://docs.romaindeville.fr/rdeville.public/my_programs/mkdocs_template/index.html
+[online_doc]: https://docs.romaindeville.fr/my_programs/mkdocs_template/index.html

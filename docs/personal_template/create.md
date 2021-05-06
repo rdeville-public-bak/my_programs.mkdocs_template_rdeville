@@ -15,7 +15,8 @@ To do so, click on the button ++"燎 Fork"++ as shown below:
 
 ![!Fork Mkdocs Template][fork_mkdocs_template]
 
-Then, choose where you want to store your fork from your accessible namespace:
+Then, choose where you want to store your fork in one of your accessible
+namespaces:
 
 ![!Fork Mkdocs Template Destination][fork_mkdocs_template_dest]
 
@@ -44,20 +45,21 @@ git clone git@gitdomain.tld:namespace/mkdocs_template.git.
 
 ## Add the content of your template
 
-Now, to setup your own template, you just have to write it in the empty folder
-but track `user_config` folder. If you happen to add a file with the same path
-from `template`, the your file will override the one in `template`.
+Now, to setup your own template, you just have to write it in the empty, but
+tracked, folder `user_config`. If you happen to add a file with the same
+path from `template`, then your file will override the one in `template`.
 
 For instance, if you create a file `user_config/docs/index.md`, its content will
 override the content of the file `template/docs/index.md` when using template.
 
 Moreover, you can add a `post_setup.sh` script in `user_config` to handle
-customized command once `setup.sh` finish.
+customized command once `setup.sh` finish. The script `post_setup.sh` will be
+automatically included at the end of the execution of the script `setup.sh`.
 
-Below are some examples such as a possible structure of `user_config` folder as
-well as some content exaple. Note that every files, hidden or not, within folder
-`user_config` are copied when installed, which can be usefull to provide
-configuration workflow files, such as `.editorconfig`, `.gitignore`, etc. files.
+Below are some examples, such as a possible structure of `user_config` folder as
+well as some content examples. Note that every files, hidden or not, within
+folder `user_config` are copied when installed, which can be usefull to provide
+configuration workflow files, such as `.editorconfig`, `.gitignore`, etc.
 
 === "Folder `user_config`"
 
@@ -398,7 +400,7 @@ git remote -v
 > origin <URL_TO_YOUR_ORIGIN_REMOTE> (push)
 ```
 
-If there is not upstream, add the `upstream` remote:
+If there is no `upstream`, add the `upstream` remote:
 
 ```bash
 git remote add upstream {{ git_platform.url }}{{ curr_repo.git_slug_with_namespace }}.git
