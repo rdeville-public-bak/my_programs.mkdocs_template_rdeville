@@ -31,3 +31,35 @@ my_first_repo:
 my_second_repo:
   name: My Second Repo
   desc: Description of My Second Repo
+
+# Navigation Pane
+# ---------------------------------------------------------------------------
+nav:
+  - Home: index.fork.md
+  - Use Template:
+    - usage/index.md
+    - Setup Template: usage/setup.md
+    - Configure Installed Template: usage/configure.md
+    - Upgrade Template: usage/upgrade.md
+  - Setup Your Own Template:
+    - personal_template/index.md
+    - Create Your Template: personal_template/create.md
+    - Use Your Template: personal_template/usage.md
+    - Example: personal_template/example.md
+  - Code References:
+    - setup.sh: references/setup.md
+    - preview.sh: references/preview.md
+    - tools:
+      - generate_source_docs.sh: references/tools/generate_source_docs.md
+    - templates:
+      - docs:
+        - _data:
+          - plugins.py: references/templates/docs/_data/plugins.py.md
+  - About:
+    - about/index.md
+    - Code of Conduct: about/code_of_conduct.fork.md
+    - Contributing: about/contributing.fork.md
+    - License: about/license.fork.md
+    - Release Notes: about/release_notes.md
+    - Data Privacy: about/data_privacy.md
+

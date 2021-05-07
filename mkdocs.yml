@@ -290,6 +290,9 @@ plugins:
             # (see docs/_data/plugins.py)
 # DO NOT FORGET TO ADD/UPDATE THE \`nav\` KEY BELOW.
 ### END MKDOCS TEMPLATE ###
+  - redirects:
+      redirect_maps:
+        index.md: index.fork.md
 
 # Navigation Pane
 # ---------------------------------------------------------------------------
