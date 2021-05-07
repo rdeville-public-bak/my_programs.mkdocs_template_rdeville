@@ -293,6 +293,10 @@ plugins:
   - redirects:
       redirect_maps:
         index.md: index.fork.md
+        about/code_of_conduct.md: about/code_of_conduct.fork.md
+        about/contributing.md: about/contributing.fork.md
+        about/license.md: about/license.fork.md
+        about/release_notes.md: about/release_notes.fork.md
 
 # Navigation Pane
 # ---------------------------------------------------------------------------
