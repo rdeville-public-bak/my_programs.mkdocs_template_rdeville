@@ -57,3 +57,7 @@ git+https://github.com/g-provost/lightgallery-markdown
 # https://github.com/fralau/mkdocs-mermaid2-plugin#declaring-the-superfences-extension
 mkdocs-mermaid2-plugin
 ### END MKDOCS TEMPLATE ###
+
+# A MkDocs plugin for dynamic page redirects to prevent broken links.
+# https://pypi.org/project/mkdocs-redirects/
+mkdocs-redirects
