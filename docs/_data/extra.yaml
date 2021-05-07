@@ -2,7 +2,7 @@
 example:
   my_repo_slug:
     name: My Main Repo Name
-    desc: Description of my [Main Repo](#)
+    desc: Description of my [Main Repo]()
   subrepo:
     roles:
       nav_entry: "Roles"

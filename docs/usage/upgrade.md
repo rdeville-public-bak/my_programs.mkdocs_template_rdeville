@@ -1,8 +1,8 @@
 {% set curr_repo=subs("mkdocs_template") %}
 # Upgrade to latest template
 
-If the source template get new features, like improving `plugins.py·` script,
-you might want to get them. To to so is as easy as installing the documentation.
+If the source template get new features, like improving `plugins.py` script,
+you might want to get them. To do so is as easy as installing the documentation.
 This is done using the script `setup.sh` with the option `-u`. Below is a recall
 of the usage of the script
 
@@ -10,11 +10,10 @@ of the usage of the script
 
 ## How to upgrade
 
-
 This is done by using the option `-u` of the script `setup.sh`. Using this
-option, the script will compare last version with old version of each files, if
-they have changed, backup the old version, to avoid losing content in case of error
-and then upgrade the files to the latest version.
+option, the script will compare last version with old version of each files. If
+they have changed, backup the old version, to avoid losing content in case of
+error and then upgrade the files to the latest version.
 
 ```bash
 # ASSUMING YOU ARE IN THE REPO FOR WHICH YOU WANT TO WRITE A DOCUMENTATION

@@ -25,7 +25,7 @@ chmod +x /tmp/setup_mkdocs.sh
 ```
 
 Or if you already read the content of the script `setup.sh` at the root of this
-repo, previous commands can be done in online:
+repo, previous commands can be done in one line:
 
 ```bash
 # ASSUMING YOU ARE IN THE REPO FOR WHICH YOU WANT TO WRITE A DOCUMENTATION
@@ -36,8 +36,8 @@ curl -sfL \
     -r {{ git_platform.url }}{{ curr_repo.git_slug_with_namespace }}
 ```
 
-This will automatically copy the content of folder `templates` of the project in
-the folder where you are located.
+This will automatically copy the content of folder `templates` of the Mkdocs
+Template project in the folder where you are located.
 
 Note that some copied files will have comment tag automatically added if they
 are not present. For instance, following example content:
@@ -48,7 +48,7 @@ are not present. For instance, following example content:
 Sample content of a page
 ```
 
-Wille be copied with the following tags:
+Will be copied with the following tags:
 
 ```md
 <!-- BEGIN MKDOCS TEMPLATE -->
@@ -61,15 +61,15 @@ Sample content of a page
 <!-- END MKDOCS TEMPLATE -->
 ```
 
-These tags serve as delimiter of the template content, without theme, any
-modification you may have done on copied file will be overwritten when you will
+These tags serve as delimiter of the template content, without them, any
+modification you may have done on copied files will be overwritten when you will
 upgrade to a latest template version.
 
 So this allow you to add content before and after these tags, content you will
 add before and after will not be modified when upgrading while content between
-tags might be updated if latest version contain updte.
+tags might be updated if latest version contain update.
 
-In other words, you might do the following update:
+In other words, you might do the following:
 
 ```md
 # Previous title
@@ -92,7 +92,7 @@ Content added by the user, which will not be updated in case of upgrade of the
 template.
 ```
 
-The tag comment depends of the extension of the file copied:
+The tag comment depends on the extension of the file copied:
 
   - `*.md`, `*.html` or `*LICENSE`, will have following tags:
     ```html
@@ -100,7 +100,7 @@ The tag comment depends of the extension of the file copied:
     <!-- WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG ! -->
     <!-- Modified content will be overwritten when updating -->
 
-    [...]
+    […]
 
     <!-- END MKDOCS TEMPLATE -->
     ```
@@ -111,7 +111,7 @@ The tag comment depends of the extension of the file copied:
     /* WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG ! */
     /* Modified content will be overwritten when updating */
 
-    [...]
+    […]
 
     /* END MKDOCS TEMPLATE */
     ```
@@ -123,16 +123,16 @@ The tag comment depends of the extension of the file copied:
     ### Modified content will be overwritten when updating ###
     ###
 
-    [...]
+    […]
 
     ### END MKDOCS TEMPLATE ###
     ```
 
-  - Other extension files will not have comment tags, this is mainly for source
-    code file or svg images for instance.
+  - Files with other extension will not have comment tags, this is mainly for
+    source code file or svg images for instance.
 
 
-Moreover, is there is already mkdocs tag in the file, the complete file will be
+Moreover, if there is already mkdocs tags in the file, the complete file will be
 copied during setup but only content between tags will be overwritten when
 upgrading.
 
@@ -142,6 +142,6 @@ all of the file will be installed while when upgrading only content between tag
 will be overwritten.
 
 Once you have install the mkdocs template files using the script `setup.sh` you
-know have some [configuration][configuration] to do.
+now have some [configuration][configuration] to do.
 
 [configuration]: configure.md
