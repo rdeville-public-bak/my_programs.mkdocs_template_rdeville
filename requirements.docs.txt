@@ -158,3 +158,6 @@ wheel==0.36.2
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
 ### END MKDOCS TEMPLATE ###
+
+mkdocs-redirects==1.0.3
+    # via -r requirements.docs.in
