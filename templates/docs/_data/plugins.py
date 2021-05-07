@@ -914,9 +914,11 @@ def define_env(env: dict) -> None:
             var: Key in env.variables to return.
 
         Returns:
-            The value of `env.variables[var]`.
+            The value of `env.variables[var]` if it exists, else return None.
         """
-        return env.variables[var]
+        if var in env.variables:
+            return env.variables[var]
+        return None
 
     @env.macro
     # pylint: disable=W0612
