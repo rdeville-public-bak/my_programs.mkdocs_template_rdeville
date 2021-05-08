@@ -153,6 +153,10 @@ def add_external_to_nav(
                         repo_parent,
                         nav_parent[1:],
                     )
+    elif repo_dict["online_url"].startswith('/'):
+        nav.append({
+            repo_dict["nav_entry"]: repo_dict["online_url"].replace('/','../',1)
+        })
     else:
         nav.append({repo_dict["nav_entry"]: repo_dict["online_url"]})
 
