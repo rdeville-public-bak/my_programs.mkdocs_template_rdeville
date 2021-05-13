@@ -22,6 +22,10 @@ subrepo:
   #     - name: subrepo_1
   #       # SSH or HTTP link to the online subrepo_1
   #       git_url: git@domain.tld:namesapce/subrepo_1
+  #       # Key `subpath` is a str pointing to the path in the subrepo where
+  #       # there is a file `mkdocs.yaml` and folder `docs` if not the root
+  #       # of the subrepo
+  #       subpath: sub/dir/
   #   # List of subdirectory from `dir_name` which are repos with
   #   # mkdocs documentation which will be included in the documentation.
   #   external:
@@ -31,6 +35,10 @@ subrepo:
   #     - name: subrepo_2
   #       # SSH or HTTP link to the online subrepo_2
   #       git_url: git@domain.tld:namesapce/subrepo_2
+  #       # Key `subpath` is a str pointing to the path in the subrepo where
+  #       # there is a file `mkdocs.yaml` and folder `docs` if not the root
+  #       # of the subrepo
+  #       subpath: sub/dir/
   #   # Another sub dir_name which also old subrepos
   #   subdir_name:
   #     nav_entry: "Sub Nav Entry"

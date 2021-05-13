@@ -1,7 +1,7 @@
 {% set curr_repo=subs("mkdocs_template") %}
 # Example
 
-This current documentation you are reading is actually using the custom template
+The current documentation you are reading is actually using the custom template
 [Mkdocs Template R.Deville][mkdocs_template_rdeville].
 
 This custom template add a lots of things such as :
@@ -22,11 +22,9 @@ This custom template add a lots of things such as :
 Below is an example of the rendering of the preview of the basic template and
 the custom template.
 
-
 === "Basic Template"
 
     ![!Basic Template Preview][basic_template_preview]
-
 
 === "Custom Template"
 
