@@ -14,11 +14,11 @@ Modified content will be overwritten when updating
 
 - 📝 Update documentation content.
 - 🔧 Update extra content through yaml `_data·` files
- - Add new content
- - Add documentation in template files
+    - Add new content
+    - Add documentation in template files
 - ✨ Improve `plugins.py` behaviour
-  - Convert `.format()` string into `f""` string
-  - Fix configuration management
+    - Convert `.format()` string into `f""` string
+    - Fix configuration management
 - ⬆📌 Upgrade pinned python dependencies
 
 
