@@ -837,10 +837,8 @@ def update_version(env: dict) -> None:
             if last_major >= 0:
                 mike_version.append(
                     {
-                        "version": "{}.{}".format(last_major, last_minor),
-                        "title": "{}.{}.{}".format(
-                            last_major, last_minor, last_patch
-                        ),
+                        "version": f"{last_major}.{last_minor}",
+                        "title": f"{last_major}.{last_minor}.{last_patch}",
                         "aliases": [],
                     }
                 )
@@ -850,10 +848,8 @@ def update_version(env: dict) -> None:
             if last_minor >= 0:
                 mike_version.append(
                     {
-                        "version": "{}.{}".format(last_major, last_minor),
-                        "title": "{}.{}.{}".format(
-                            last_major, last_minor, last_patch
-                        ),
+                        "version": f"{last_major}.{last_minor}",
+                        "title": f"{last_major}.{last_minor}.{last_patch}",
                         "aliases": [],
                     }
                 )
@@ -863,8 +859,8 @@ def update_version(env: dict) -> None:
             last_patch = patch
     mike_version.append(
         {
-            "version": "{}.{}".format(last_major, last_minor),
-            "title": "{}.{}.{}".format(last_major, last_minor, last_patch),
+            "version": f"{last_major}.{last_minor}",
+            "title": f"{last_major}.{last_minor}.{last_patch}",
             "aliases": ["latest"],
         }
     )
