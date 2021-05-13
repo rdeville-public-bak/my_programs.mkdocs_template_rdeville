@@ -10,6 +10,18 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.3 <small>(13/05/2021)</small>
+
+- 📝 Update documentation content.
+- 🔧 Update extra content through yaml `_data·` files
+ - Add new content
+ - Add documentation in template files
+- ✨ Improve `plugins.py` behaviour
+  - Convert `.format()` string into `f""` string
+  - Fix configuration management
+- ⬆📌 Upgrade pinned python dependencies
+
+
 ### 🔖 v1.0.2 <small>(29/04/2021)</small>
 
 - 📝📄 Update copyright in license content
