@@ -826,13 +826,20 @@ def update_version(env: dict) -> None:
     mike_version = list()
     last_major = -1
     last_minor = -1
-    last_patch = -1
+    last_patch = str(-1)
     for i_tag in git_repo.tags:
         i_tag = yaml.dump(i_tag.path)
         i_tag = re.sub(".*v", "", i_tag).split(".")
         major = int(i_tag[0])
         minor = int(i_tag[1])
-        patch = int(i_tag[2])
+        patch = str()
+        for i_remain_tag in i_tag[2:]:
+            if i_remain_tag and i_remain_tag not in ("","\n"):
+                i_remain_tag = i_remain_tag.replace("\n","")
+                if not patch:
+                    patch = f"{i_remain_tag}"
+                else:
+                    patch = f"{patch}.{i_remain_tag}"
         if major > last_major:
             if last_major >= 0:
                 mike_version.append(
@@ -854,9 +861,10 @@ def update_version(env: dict) -> None:
                     }
                 )
             last_minor = minor
-            last_patch = -1
+            last_patch = str(-1)
         if patch > last_patch:
-            last_patch = patch
+            last_patch = str(patch)
+
     mike_version.append(
         {
             "version": f"{last_major}.{last_minor}",
