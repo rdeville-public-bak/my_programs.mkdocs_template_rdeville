@@ -8,10 +8,29 @@ Modified content will be overwritten when updating
 
 <!-- END MKDOCS TEMPLATE -->
 
+## 🔖 v1.0
+
+
+### 🔖 v1.0.3-RD.1 <small>(13/05/2021)</small>
+
+Simple release to publish Mkdocs Template R. Deville based on v1.0.3 of main
+Mkdocs Template.
+
 {% set mkdocs_template_url = git_platform.url ~ mkdocs_template.git_slug_with_namespace %}
 ??? info "Release Note from [mkdocs_template]({{ mkdocs_template_url}})"
 
     ## 🔖 v1.0
+
+    ### 🔖 v1.0.3 <small>(13/05/2021)</small>
+
+    - 📝 Update documentation content.
+    - 🔧 Update extra content through yaml `_data·` files
+        - Add new content
+        - Add documentation in template files
+    - ✨ Improve `plugins.py` behaviour
+        - Convert `.format()` string into `f""` string
+        - Fix configuration management
+    - ⬆📌 Upgrade pinned python dependencies
 
     ### 🔖 v1.0.2 <small>(29/04/2021)</small>
 
