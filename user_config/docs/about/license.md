@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 {% set curr_repo=subs("TODO") %}
 
 <!-- BEGIN MKDOCS TEMPLATE -->
@@ -12,16 +13,18 @@ Modified content will be overwritten when updating
 
 Software is under double licensing:
 
- - [MIT License](#mit-license)
- - [Beer-Ware License](#the-beer-ware-license)
+* [MIT License](#mit-license)
+* [Beer-Ware License](#the-beer-ware-license)
 
 ## MIT License
 
 {{ date_copyright }}
 
+<!-- markdownlint-disable MD032 -->
 {% for i_maintainer in curr_repo.maintainers %}
-  - [{{ i_maintainer.name }}](mailto:{{ i_maintainer.mail }})
+* [{{ i_maintainer.name }}](mailto:{{ i_maintainer.mail }})
 {% endfor %}
+<!-- markdownlint-enable MD032 -->
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,9 +48,11 @@ SOFTWARE.
 
 Following maintainers worked on this project:
 
+<!-- markdownlint-disable MD032 -->
 {% for i_maintainer in curr_repo.maintainers %}
-  - [{{ i_maintainer.name }}](mailto:{{ i_maintainer.mail }})
+* [{{ i_maintainer.name }}](mailto:{{ i_maintainer.mail }})
 {% endfor %}
+<!-- markdownlint-enable MD032 -->
 
 As long as you retain this notice you can do whatever you want with this stuff.
 
