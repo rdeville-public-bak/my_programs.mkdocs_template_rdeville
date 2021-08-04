@@ -10,6 +10,10 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.3-RD.3 <small>(04/08/2021)</small>
+
+* 🚑💚 Fix CI to pass CI Lint
+
 ### 🔖 v1.0.3-RD.2 <small>(04/08/2021)</small>
 
 * Fix markdownlint issues in md files in user_config
