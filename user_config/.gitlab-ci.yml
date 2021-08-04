@@ -57,23 +57,24 @@ variables:
 # -----------------------------------------------------------------------------
 # https://docs.gitlab.com/ee/ci/yaml/README.html#before_script
 .before_script_python_dependencies: &before_script_python_dependencies
-  # Go to main .gitlab-ci.yml location
-  - cd "${CI_CONFIG_PATH%/*}"
-  # Add python dependencies
-  - apk update
-  # Install base package required for mkdocs builds
-  - apk add --no-cache --update-cache
-      build-base
-      python3-dev
-      py3-pip
-      py3-virtualenv
-      bash
-      git
-      gcc
-  # Create virtual environment
-  - virtualenv .venv
-  # Activate virtual environment
-  - source .venv/bin/activate
+  before_script:
+    # Go to the right directory
+    - cd "${CI_CONFIG_PATH%/*}"
+    # Add python dependencies
+    - apk update
+    # Install base package required for mkdocs builds
+    - apk add --no-cache --update-cache
+        build-base
+        python3-dev
+        py3-pip
+        py3-virtualenv
+        bash
+        git
+        gcc
+    # Create virtual environment
+    - virtualenv .venv
+    # Activate virtual environment
+    - source .venv/bin/activate
 
 # Rules anchors
 # -----------------------------------------------------------------------------
