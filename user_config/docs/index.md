@@ -3,7 +3,7 @@ hide:
   - navigation # Hide navigation
   - toc        # Hide table of contents
 ---
-
+<!-- markdownlint-disable MD041 -->
 {% set curr_repo=subs("TODO") %}
 
 <!-- BEGIN MKDOCS TEMPLATE -->
@@ -38,7 +38,5 @@ platforms.
   </b>
 
 </div>
-
---------------------------------------------------------------------------------
 
 <!-- END MKDOCS TEMPLATE -->
