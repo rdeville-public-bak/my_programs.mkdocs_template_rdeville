@@ -47,6 +47,8 @@ variables:
 # -----------------------------------------------------------------------------
 # https://docs.gitlab.com/ee/ci/yaml/README.html#before_script
 .before_script_python_dependencies: &before_script_python_dependencies
+  # Go to main .gitlab-ci.yml location
+  - cd "${CI_CONFIG_PATH%/*}"
   # Add python dependencies
   - apk update
   # Install base package required for mkdocs builds
@@ -64,6 +66,8 @@ variables:
   - source .venv/bin/activate
 
 .before_script_prepare_deployment: &before_script_prepare_deployment
+  # Go to main .gitlab-ci.yml location
+  - cd "${CI_CONFIG_PATH%/*}"
   # Add rsync dependencies
   - apk update
   - apk add --no-cache --update-cache
@@ -375,6 +379,7 @@ script_deploy_html: &script_deploy_html
       </body>\n
       </html>" > tmp/${PROJECT_PATH}/index.html
     - rsync -Oavz "tmp/" "${RSYNC_DEST}"
+    - echo "Website is available here: ${ONLINE_PATH}"
   rules:
     - *rules_prod
     - *rules_pre_prod

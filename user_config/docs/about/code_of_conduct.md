@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 {% set curr_repo=subs("TODO") %}
 
 <!-- BEGIN MKDOCS TEMPLATE -->
@@ -68,9 +69,13 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at:
-{% for i_maintainer in curr_repo.maintainers %}
-  - **[📧 {{ i_maintainer.name }} <{{ i_maintainer.mail }}>](mailto:{{ i_maintainer.mail }})**
-{% endfor %}
+
+<!-- markdownlint-disable MD032 MD013 -->
+{%- for i_maintainer in curr_repo.maintainers %}
+* **[📧 {{ i_maintainer.name }} \<{{ i_maintainer.mail }}\>](mailto:{{ i_maintainer.mail }})**
+{%- endfor %}
+<!-- markdownlint-enable MD032 MD013 -->
+
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the

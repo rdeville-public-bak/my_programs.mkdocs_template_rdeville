@@ -106,23 +106,13 @@ main_post_setup()
       # Place the content of variable which name is defined by ${msg_severity}
       # For instance, if `msg_severity` is INFO, then `prefix` will have the same
       # value as variable `info`.
-      if [[ -n "${ZSH_VERSION}" ]]
-      then
-        prefix="${(P)msg_severity}"
-      else
-        prefix="${!msg_severity}"
-      fi
+      prefix="${!msg_severity}"
       color_output="e_${msg_severity}"
     else
       prefix="${info}"
     fi
 
-    if [[ -n "${ZSH_VERSION}" ]]
-    then
-      color_output="${(P)color_output}"
-    else
-      color_output="${!color_output}"
-    fi
+    color_output="${!color_output}"
 
     # Concat all remaining arguments in the message content and apply markdown
     # like syntax.
