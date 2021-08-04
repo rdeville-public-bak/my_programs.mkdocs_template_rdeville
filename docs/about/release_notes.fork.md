@@ -10,6 +10,10 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.3-RD.4 <small>(04/08/2021)</small>
+
+* 🚑💚 Fix CI to work even better with VCSH repos
+
 ### 🔖 v1.0.3-RD.3 <small>(04/08/2021)</small>
 
 * 🚑💚 Fix CI to pass CI Lint
