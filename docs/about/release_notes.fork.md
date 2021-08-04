@@ -10,13 +10,21 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.3-RD.2 <small>(04/08/2021)</small>
+
+* Fix markdownlint issues in md files in user_config
+* Upgrade CI to better support vcsh repo
+* Update gitignore
+* Remove useless pinned requirement file in user_config
 
 ### 🔖 v1.0.3-RD.1 <small>(13/05/2021)</small>
 
 Simple release to publish Mkdocs Template R. Deville based on v1.0.3 of main
 Mkdocs Template.
 
+<!-- markdownlint-disable MD013 -->
 {% set mkdocs_template_url = git_platform.url ~ mkdocs_template.git_slug_with_namespace %}
+<!-- markdownlint-enable MD013 -->
 ??? info "Release Note from [mkdocs_template]({{ mkdocs_template_url}})"
 
     ## 🔖 v1.0
