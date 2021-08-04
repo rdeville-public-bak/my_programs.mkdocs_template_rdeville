@@ -341,7 +341,7 @@ build_html:
     - mkdocs build
   artifacts:
     paths:
-      - site/
+      - ${CI_CONFIG_PATH%/*}/site/
 
 # Jobs in deploy stage
 # -----------------------------------------------------------------------------
@@ -357,7 +357,7 @@ script_deploy_html: &script_deploy_html
     - *before_script_prepare_deployment
   script:
     - mkdir -p "tmp/${RSYNC_PATH}"
-    - mv ${CI_CONFIG_PATH%/*}site/* "tmp/${RSYNC_PATH}/"
+    - mv site/* "tmp/${RSYNC_PATH}/"
     - |
       if [[ -f "tmp/${RSYNC_PATH}/versions.json" ]]
       then
@@ -382,8 +382,7 @@ script_deploy_html: &script_deploy_html
         Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...\n
       </body>\n
       </html>" > tmp/${PROJECT_PATH}/index.html
-    - rsync -Oavz "tmp/" "${RSYNC_DEST}"
-    - echo "Website is available here: ${ONLINE_PATH}"
+    - rsync --no-perms -Oavz "tmp/" "${RSYNC_DEST}"
   rules:
     - *rules_prod
     - *rules_pre_prod
