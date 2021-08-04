@@ -85,6 +85,43 @@ variables:
   - eval $(ssh-agent -s)
   # Add the private SSH key to be able to connect to the perso LIRIS website
   - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+  # Get latest information (minaly to get tag)
+  - git fetch --all
+  # Parse tag vMAJOR.MINOR.PATCH to extract information MAJOR.MINOR
+  - export LAST_TAG="$(git describe --tags `git rev-list --tags --max-count=1`)"
+  - export LAST_TAG="${LAST_TAG/v/}"
+  - export LAST_TAG="${LAST_TAG%.*}"
+  # Setup path where files will be sent depending on DEPLOY_TYPE (dev, pre_prod,
+  # prod)
+  - |
+    case "${CI_DEPLOY_TYPE}" in
+      "dev")
+        if [[ -n "${RSYNC_BASE_PATH}" ]];
+        then
+          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
+        else
+          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
+        fi
+        ;;
+      "pre_prod")
+        if [[ -n "${RSYNC_BASE_PATH}" ]];
+        then
+          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
+        else
+          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
+        fi
+        ;;
+      "prod")
+        if [[ -n "${RSYNC_BASE_PATH}" ]];
+        then
+          export PROJECT_PATH="/${RSYNC_BASE_PATH}/";
+        else
+          export PROJECT_PATH="/"
+        fi
+        ;;
+    esac
+  - export RSYNC_PATH="${PROJECT_PATH}${LAST_TAG}"
+  - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}latest"
 
 .before_script_export_variable: &before_script_export_variable
   # Update values of some variables depending on the CI_DEPLOY_TYPE
@@ -319,41 +356,8 @@ script_deploy_html: &script_deploy_html
     - *before_script_export_variable
     - *before_script_prepare_deployment
   script:
-    - git fetch --all
-    - export LAST_TAG="$(git describe --tags `git rev-list --tags --max-count=1`)"
-    - export LAST_TAG="${LAST_TAG/v/}"
-    - export LAST_TAG="${LAST_TAG%.*}"
-    - |
-      case "${CI_DEPLOY_TYPE}" in
-        "dev")
-          if [[ -n "${RSYNC_BASE_PATH}" ]];
-          then
-            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
-          else
-            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
-          fi
-          ;;
-        "pre_prod")
-          if [[ -n "${RSYNC_BASE_PATH}" ]];
-          then
-            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
-          else
-            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
-          fi
-          ;;
-        "prod")
-          if [[ -n "${RSYNC_BASE_PATH}" ]];
-          then
-            export PROJECT_PATH="/${RSYNC_BASE_PATH}/";
-          else
-            export PROJECT_PATH="/"
-          fi
-          ;;
-      esac
-    - export RSYNC_PATH="${PROJECT_PATH}${LAST_TAG}"
-    - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}latest"
     - mkdir -p "tmp/${RSYNC_PATH}"
-    - mv site/* "tmp/${RSYNC_PATH}/"
+    - mv ${CI_CONFIG_PATH%/*}site/* "tmp/${RSYNC_PATH}/"
     - |
       if [[ -f "tmp/${RSYNC_PATH}/versions.json" ]]
       then
