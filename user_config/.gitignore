@@ -4,6 +4,7 @@
 .tmuxinator.yml
 .old/
 .tmp/
+.undodir
 
 ### BEGIN MKDOCS TEMPLATE ###
 ### WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG ! ###
