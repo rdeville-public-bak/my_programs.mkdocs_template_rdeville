@@ -79,8 +79,6 @@ extra_css:
   # Define css for lightgallery
   # From: https://github.com/g-provost/lightgallery-markdown
   - theme/css/lightgallery.css
-  # Define personal extra css
-  - theme/css/extra.css
   # Define colors (all materials colors RGB code)
   - theme/css/colors.css
   # Define fonts
@@ -89,6 +87,8 @@ extra_css:
   - theme/css/theme.css
   # Define css of base markdown extension and pymdown extension
   - theme/css/python_markdown_extension.css
+  # Define personal extra css
+  - theme/css/extra.css
 
 # External JS
 # ---------------------------------------------------------------------------
@@ -148,12 +148,8 @@ markdown_extensions:
       nbsp: True
   - pymdownx.critic:
   - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.twemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-      options:
-        image_path: /assets/twemoji/svg/
-        custom_icons:
-          - .icons
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.inlinehilite:
       custom_inline:
         - name: math
@@ -241,9 +237,6 @@ plugins:
       fallback_to_build_date: true
     # https://github.com/oprypin/mkdocs-section-index
     # MkDocs plugin to allow clickable sections that lead to an index page
-  - section-index:
-    # https://github.com/apenwarr/mkdocs-exclude
-    # A mkdocs plugin that lets you exclude files or trees.
   - exclude:
       regex:
         - .*theme.*.md
@@ -291,7 +284,32 @@ plugins:
             # (see docs/_data/plugins.py)
 # DO NOT FORGET TO ADD/UPDATE THE \`nav\` KEY BELOW.
 ### END MKDOCS TEMPLATE ###
-#  - redirects:
+#   - with-pdf:
+#       cover: true
+#       back_cover: true
+#       cover_subtitle: ""
+#       toc_title: "Table of Content"
+#       toc_level: 6
+#       ordered_chapter_level: 3
+#       excludes_children:
+#           - 'release-notes/:upgrading'
+#           - 'release-notes/:changelog'
+#       exclude_pages:
+#           - 'bugs/'
+#           - 'appendix/contribute/'
+#           - src: IFRAME SRC
+#             img: POSTER IMAGE URL
+#             text: ALTERNATE TEXT
+#           - src: ...
+#       two_columns_level: 3
+#       render_js: true
+#       headless_chrome_path: headless-chromium
+#       output_path: any-place/document.pdf
+#       enabled_if_env: ENABLE_PDF_EXPORT
+#       debug_html: true
+#       show_anchors: true
+#       verbose: true
+#  - redirects: # WARNING, INCOMPATIBLE WITH `with-pdf`
 #      redirect_maps:
 #        index.md: index.fork.md
 
