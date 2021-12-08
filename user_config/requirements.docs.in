@@ -11,7 +11,7 @@ mkdocs
 
 # A Material Design theme for MkDocs
 # https://pypi.org/project/mkdocs-material/
-mkdocs-material>=7.3
+mkdocs-material>=8.0
 
 # Plugin for adding monorepository support in Mkdocs.
 # https://pypi.org/project/mkdocs-monorepo-plugin/
