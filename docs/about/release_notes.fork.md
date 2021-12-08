@@ -10,6 +10,11 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.5-RD.2 <small>(08/08/2021)</small>
+
+  * 🚨 Fix shellcheck linter warning
+
+
 ### 🔖 v1.0.5-RD.1 <small>(08/08/2021)</small>
 
   * ⬆📝 Upgrade documentation content from v1.0.4-RD.2 template
