@@ -132,23 +132,12 @@ mkdocs_log()
     # Place the content of variable which name is defined by ${msg_severity}
     # For instance, if `msg_severity` is INFO, then `prefix` will have the same
     # value as variable `info`.
-    if [[ -n "${ZSH_VERSION}" ]]
-    then
-      prefix="${(P)msg_severity}"
-    else
-      prefix="${!msg_severity}"
-    fi
+    prefix="${!msg_severity}"
     color_output="e_${msg_severity}"
   else
     prefix="${info}"
   fi
-
-  if [[ -n "${ZSH_VERSION}" ]]
-  then
-    color_output="${(P)color_output}"
-  else
-    color_output="${!color_output}"
-  fi
+  color_output="${!color_output}"
 
   # Concat all remaining arguments in the message content and apply markdown
   # like syntax.
@@ -427,12 +416,7 @@ parse_method_doc_line()
     var_subst="$( echo ${part} | tr '[:upper:]' '[:lower:]')_doc"
 
     # Handling of zsh for variable substitution
-    if [[ -n "${ZSH_VERSION}" ]]
-    then
-      part_content="${(P)var_subst}"
-    else
-      part_content="${!var_subst}"
-    fi
+    part_content="${!var_subst}"
 
     # If part content is empty or made of only empty lines
     if [[ -z "${part_content}" ]] || [[ -z "$(echo -e "${part_content}")" ]]

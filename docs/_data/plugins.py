@@ -153,10 +153,14 @@ def add_external_to_nav(
                         repo_parent,
                         nav_parent[1:],
                     )
-    elif repo_dict["online_url"].startswith('/'):
-        nav.append({
-            repo_dict["nav_entry"]: repo_dict["online_url"].replace('/','../',1)
-        })
+    elif repo_dict["online_url"].startswith("/"):
+        nav.append(
+            {
+                repo_dict["nav_entry"]: repo_dict["online_url"].replace(
+                    "/", "../", 1
+                )
+            }
+        )
     else:
         nav.append({repo_dict["nav_entry"]: repo_dict["online_url"]})
 
@@ -171,7 +175,7 @@ def add_nav_entry(nav: list, nav_parent: list = None) -> None:
         nav : Navigation dictionary (subpart of it if called recursively)
         nav_parent : List of keys storing parents `nav_entry` keys
     """
-    entry = dict()
+    entry = {}
 
     for i_nav in nav:
         if nav_parent[0] in i_nav:
@@ -220,10 +224,10 @@ def update_nav(
     """
     for i_key in repo_dict:
         if not nav_parent or first_iteration:
-            nav_parent = list()
+            nav_parent = []
 
         if not repo_parent or first_iteration:
-            repo_parent = list()
+            repo_parent = []
 
         if i_key == "nav_entry":
             nav_parent.append(repo_dict["nav_entry"])
@@ -406,9 +410,7 @@ def set_copyright(env: dict, git_repo: git.Repo) -> None:
         curr_year = time.strftime("%Y", time.localtime())
 
         if first_year == curr_year:
-            env.variables[
-                "date_copyright"
-            ] = f"Copyright &copy; {curr_year}"
+            env.variables["date_copyright"] = f"Copyright &copy; {curr_year}"
         else:
             env.variables[
                 "date_copyright"
@@ -417,7 +419,6 @@ def set_copyright(env: dict, git_repo: git.Repo) -> None:
         env.conf[
             "copyright"
         ] = f"{env.variables['date_copyright']} {env.variables['copyright']}"
-
 
 
 def set_repo_name(env: dict, repo_slug: str) -> None:
@@ -599,7 +600,7 @@ def load_yaml_file(path: str, filename: str) -> None:
         schema.validate(raise_exception=True)
         data_content = schema.source
     else:
-        with open(source_file) as file:
+        with open(source_file, encoding="UTF-8") as file:
             data_content = yaml.safe_load(file)
 
     return data_content, data_type
@@ -673,7 +674,7 @@ def update_subrepo_info(
     Return:
         A updating dictionary storing subrepo information
     """
-    return_dict = dict()
+    return_dict = {}
     for i_repo in subrepo_list:
         subrepo_root = os.path.join(path, i_repo["name"])
 
@@ -728,7 +729,7 @@ def update_subrepo(
     Returns:
         An updated dictionary of repo informations.
     """
-    return_dict = dict()
+    return_dict = {}
     for i_key in subrepo_dict:
         if isinstance(subrepo_dict[i_key], list):
             if i_key == "external":
@@ -823,7 +824,7 @@ def update_version(env: dict) -> None:
     ):
         return
     git_repo = git.Repo(search_parent_directories=True)
-    mike_version = list()
+    mike_version = []
     last_major = -1
     last_minor = -1
     last_patch = str(-1)
@@ -834,8 +835,8 @@ def update_version(env: dict) -> None:
         minor = int(i_tag[1])
         patch = str()
         for i_remain_tag in i_tag[2:]:
-            if i_remain_tag and i_remain_tag not in ("","\n"):
-                i_remain_tag = i_remain_tag.replace("\n","")
+            if i_remain_tag and i_remain_tag not in ("", "\n"):
+                i_remain_tag = i_remain_tag.replace("\n", "")
                 if not patch:
                     patch = f"{i_remain_tag}"
                 else:
@@ -874,7 +875,9 @@ def update_version(env: dict) -> None:
     )
     mike_version.reverse()
     with open(
-        os.path.join(env.project_dir, "docs", "versions.json"), "w"
+        os.path.join(env.project_dir, "docs", "versions.json"),
+        "w",
+        encoding="UTF-8",
     ) as version_file:
         json.dump(mike_version, version_file, indent=2)
 
