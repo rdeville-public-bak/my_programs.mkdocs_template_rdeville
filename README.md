@@ -114,7 +114,6 @@ This is the basic usage of the template, but you might want to provide your own
 configuration (such as other color palette or add a default license). This will
 be explain in the [Online Documentation][online_doc].
 
-
 <!-- BEGIN MKDOCS TEMPLATE -->
 <!--
      WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !
@@ -132,8 +131,8 @@ documentation is jointly stored within the repository).
 
 To do so, you will need the following requirements:
 
-  - Python >= 3.8
-  - Pip3 with Python >= 3.8
+  * Python >= 3.8
+  * Pip3 with Python >= 3.8
 
 First setup a temporary python virtual environment and activate it:
 
@@ -143,6 +142,7 @@ python3 -m venv .temporary_venv
 # Activate it
 source .temporary_venv/bin/activate
 ```
+
 Now, install required dependencies to render the documentation using
 [mkdocs][mkdocs] in the python virtual environment:
 
