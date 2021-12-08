@@ -183,23 +183,12 @@ main()
       # Place the content of variable which name is defined by ${msg_severity}
       # For instance, if `msg_severity` is INFO, then `prefix` will have the same
       # value as variable `info`.
-      if [[ -n "${ZSH_VERSION}" ]]
-      then
-        prefix="${(P)msg_severity}"
-      else
-        prefix="${!msg_severity}"
-      fi
+      prefix="${!msg_severity}"
       color_output="e_${msg_severity}"
     else
       prefix="${info}"
     fi
-
-    if [[ -n "${ZSH_VERSION}" ]]
-    then
-      color_output="${(P)color_output}"
-    else
-      color_output="${!color_output}"
-    fi
+    color_output="${!color_output}"
 
     # Concat all remaining arguments in the message content and apply markdown
     # like syntax.
@@ -307,6 +296,9 @@ main()
       return 1
     fi
 
+    # - SC2295: Expansions inside ${..} need to be quoted separately,
+    #           otherwise the match as pattern
+    # shellcheck disable=SC2295
     mkdocs_log "INFO" "Cloning mkdocs_template repo to **${MKDOCS_TMP##*${MKDOCS_ROOT}\/}/mkdocs_template**."
     mkdir -p "${MKDOCS_TMP}"
 
@@ -395,6 +387,9 @@ main()
     # """
     local file_from=$1
     local file_to=$2
+    # - SC2295: Expansions inside ${..} need to be quoted separately,
+    #           otherwise the match as pattern
+    # shellcheck disable=SC2295
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
     local tmp_file_from="${MKDOCS_TMP}/new_mkdocs.yml"
     local tmp_file_to="${MKDOCS_TMP}/old_mkdocs.yml"
@@ -409,7 +404,10 @@ main()
     if [[ "${SUBREPO}" == "false" ]]
     then
       file_to=${file_to//mkdocs.local.yml/mkdocs.yml}
-      relative_file_to=${file_to##*${MKDOCS_ROOT}\/}
+      # - SC2295: Expansions inside ${..} need to be quoted separately,
+      #           otherwise the match as pattern
+      # shellcheck disable=SC2295
+      relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
       bak_file=${file_to//${MKDOCS_ROOT}/${MKDOCS_ROOT}\/.old}.$(date "+%Y-%m-%d-%H-%M")
     fi
 
@@ -419,7 +417,10 @@ main()
     if [[ "$(sha1sum "${tmp_file_from}" | cut -d " " -f 1 )" \
        != "$(sha1sum "${tmp_file_to}"   | cut -d " " -f 1 )" ]]
     then
-      mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}.**"
+      # - SC2295: Expansions inside ${..} need to be quoted separately,
+      #           otherwise the match as pattern
+      # shellcheck disable=SC2295
+      mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}**."
       if ! [[ -d "${bak_dir}" ]]
       then
         mkdir -p "${bak_dir}"
@@ -465,6 +466,9 @@ main()
 
     local file_from=$1
     local file_to=$2
+    # - SC2295: Expansions inside ${..} need to be quoted separately,
+    #           otherwise the match as pattern
+    # shellcheck disable=SC2295
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
 
     if [[ "${SUBREPO}" == "false" ]]
@@ -516,6 +520,9 @@ EOM
 
     local file_from="$1"
     local file_to="$2"
+    # - SC2295: Expansions inside ${..} need to be quoted separately,
+    #           otherwise the match as pattern
+    # shellcheck disable=SC2295
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
     local tmp_file_from="${MKDOCS_TMP}/${relative_file_to}.new"
     local tmp_file_to="${MKDOCS_TMP}/${relative_file_to}.old"
@@ -586,7 +593,10 @@ ${end}"
         if [[ "$(sha1sum "${tmp_file_from}" | cut -d " " -f 1 )" \
            != "$(sha1sum "${tmp_file_to}"   | cut -d " " -f 1 )" ]]
         then
-          mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}.**"
+          # - SC2295: Expansions inside ${..} need to be quoted separately,
+          #           otherwise the match as pattern
+          # shellcheck disable=SC2295
+          mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}**."
           if ! [[ -d "${bak_dir}" ]]
           then
             mkdir -p "${bak_dir}"
@@ -602,7 +612,10 @@ ${end}"
       elif [[ "$(sha1sum "${file_from}" | cut -d " " -f 1 )" \
            != "$(sha1sum "${file_to}"   | cut -d " " -f 1 )" ]]
       then
-        mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}.**"
+        # - SC2295: Expansions inside ${..} need to be quoted separately,
+        #           otherwise the match as pattern
+        # shellcheck disable=SC2295
+        mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}**."
         if ! [[ -d "${bak_dir}" ]]
         then
           mkdir -p "${bak_dir}"
@@ -639,6 +652,9 @@ ${end}"
 
     local file_from="$1"
     local file_to="$2"
+    # - SC2295: Expansions inside ${..} need to be quoted separately,
+    #           otherwise the match as pattern
+    # shellcheck disable=SC2295
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
     local begin=""
     local end=""
@@ -822,6 +838,9 @@ ${end}"
       curr_dirname="$(dirname "${file_to}")"
       if ! [[ -d "${curr_dirname}" ]]
       then
+          # - SC2295: Expansions inside ${..} need to be quoted separately,
+          #           otherwise the match as pattern
+          # shellcheck disable=SC2295
         mkdocs_log "INFO" "Create dir **${curr_dirname##*${MKDOCS_ROOT}\/}**."
         mkdir -p "${curr_dirname}"
       fi
@@ -830,8 +849,14 @@ ${end}"
         last_dirname=${curr_dirname}
         if [[ "${UPGRADE}" == "true" ]]
         then
+          # - SC2295: Expansions inside ${..} need to be quoted separately,
+          #           otherwise the match as pattern
+          # shellcheck disable=SC2295
           mkdocs_log "INFO" "Check file to upgrade in **./${last_dirname##*${MKDOCS_ROOT}\/}**."
         else
+          # - SC2295: Expansions inside ${..} need to be quoted separately,
+          #           otherwise the match as pattern
+          # shellcheck disable=SC2295
           mkdocs_log "INFO" "Installing files in **./${last_dirname##*${MKDOCS_ROOT}\/}**."
         fi
       fi
