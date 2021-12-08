@@ -154,12 +154,8 @@ markdown_extensions:
       nbsp: True
   - pymdownx.critic:
   - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.twemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-      options:
-        image_path: /assets/twemoji/svg/
-        custom_icons:
-          - .icons
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.inlinehilite:
       custom_inline:
         - name: math

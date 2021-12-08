@@ -56,6 +56,10 @@ mkdocs-mermaid2-plugin
 # A MkDocs plugin for dynamic page redirects to prevent broken links.
 # https://pypi.org/project/mkdocs-redirects/
 mkdocs-redirects
+
+# Generate a single PDF file from MkDocs repository.
+# https://pypi.org/project/mkdocs-with-pdf
+mkdocs-with-pdf
 ### END MKDOCS TEMPLATE ###
 
 # A MkDocs plugin for dynamic page redirects to prevent broken links.
