@@ -100,6 +100,7 @@ def add_internal_to_nav(
     """
     if nav_parent:
         for i_nav in nav:
+            # "nav_entry" is a key of current parsed `nav`
             if nav_parent[0] in i_nav:
                 for i_key in i_nav:
                     add_internal_to_nav(
@@ -108,6 +109,16 @@ def add_internal_to_nav(
                         repo_dict,
                         repo_parent,
                         nav_parent[1:],
+                    )
+            # "nav_entry" is a subkey of current parsed `nav`
+            elif nav_parent[0] in yaml.dump(i_nav):
+                for i_key in i_nav:
+                    add_internal_to_nav(
+                        env,
+                        i_nav[i_key],
+                        repo_dict,
+                        repo_parent,
+                        nav_parent[0:],
                     )
     else:
         mkdocs_path = env.project_dir
@@ -233,13 +244,15 @@ def update_nav(
             nav_parent.append(repo_dict["nav_entry"])
         elif i_key == "internal":
             for i_repo in repo_dict["internal"]:
-                add_nav_entry(env.conf["nav"], nav_parent)
+                if nav_parent[0] not in yaml.dump(env.conf["nav"]):
+                    add_nav_entry(env.conf["nav"], nav_parent)
                 add_internal_to_nav(
                     env, env.conf["nav"], i_repo, repo_parent, nav_parent
                 )
         elif i_key == "external":
             for i_repo in repo_dict["external"]:
-                add_nav_entry(env.conf["nav"], nav_parent)
+                if nav_parent[0] not in yaml.dump(env.conf["nav"]):
+                    add_nav_entry(env.conf["nav"], nav_parent)
                 add_external_to_nav(
                     env, env.conf["nav"], i_repo, repo_parent, nav_parent
                 )
@@ -562,7 +575,7 @@ def set_config(env: dict) -> None:
 
     if "subrepo" in env.variables:
         if (
-            env.variables["internal_subdoc"]
+            not env.variables["internal_subdoc"]
             and "monorepo" in env.conf["plugins"]
         ):
             env.conf["plugins"].pop("monorepo")
@@ -683,7 +696,7 @@ def update_subrepo_info(
                 f"{INFO_CLR}INFO [macros] - Pulling repo {i_repo['name']}{RESET_CLR}"
             )
             git_subrepo = git.Repo(subrepo_root)
-            git_subrepo.remotes.origin.pull()
+            git_subrepo.remotes.origin.pull("master")
         else:
             print(
                 f"{INFO_CLR}INFO [macros] - Cloning repo {i_repo['name']}{RESET_CLR}"

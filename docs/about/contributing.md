@@ -1,6 +1,5 @@
 {% set curr_repo=subs("mkdocs_template") %}
 
-
 <!-- BEGIN MKDOCS TEMPLATE -->
 <!--
 WARNING, DO NOT UPDATE CONTENT BETWEEN MKDOCS TEMPLATE TAG !
@@ -39,7 +38,7 @@ my projects. There you will find:
   * [Syntax Guide][syntax_guide], which describe syntax guidelines per language
     to follow if you want to contribute.
   * [Contributing workflow][contributing_workflow], which provide an example
-   of the workflow I used for the development.
+    of the workflow I used for the development.
 
 [developers_guides]: {{ site_base_url }}/latest/dev_guides/index.html
 [syntax_guide]: {{ site_base_url }}/latest/dev_guides/style_guides/index.html
@@ -53,4 +52,3 @@ conduct][code_of_conduct].
 [code_of_conduct]: code_of_conduct.md
 
 <!-- END MKDOCS TEMPLATE -->
-
