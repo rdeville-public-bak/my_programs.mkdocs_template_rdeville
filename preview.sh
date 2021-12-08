@@ -163,23 +163,12 @@ main()
       # Place the content of variable which name is defined by ${msg_severity}
       # For instance, if `msg_severity` is INFO, then `prefix` will have the same
       # value as variable `info`.
-      if [[ -n "${ZSH_VERSION}" ]]
-      then
-        prefix="${(P)msg_severity}"
-      else
-        prefix="${!msg_severity}"
-      fi
+      prefix="${!msg_severity}"
       color_output="e_${msg_severity}"
     else
       prefix="${info}"
     fi
-
-    if [[ -n "${ZSH_VERSION}" ]]
-    then
-      color_output="${(P)color_output}"
-    else
-      color_output="${!color_output}"
-    fi
+    color_output="${!color_output}"
 
     # Concat all remaining arguments in the message content and apply markdown
     # like syntax.
@@ -328,7 +317,10 @@ main()
     local path=$1
     if [[ -d "${path}" ]] && ! rmdir "${path}" &> /dev/null
     then
-      mkdocs_log "INFO" "Cleaning **${path##*${MKDOCS_ROOT}\/}"
+      # - SC2295: Expansions inside ${..} need to be quoted separately,
+      #           otherwise the match as pattern
+      # shellcheck disable=SC2295
+      mkdocs_log "INFO" "Cleaning **${path##*${MKDOCS_ROOT}\/}**."
       for i_node in "${path}"/*
       do
         if [[ -d "${i_node}" ]]
@@ -394,6 +386,9 @@ main()
       if ! [[ -d "$(dirname "${file_to}")" ]]
       then
         dir=$(dirname "${file_to}")
+        # - SC2295: Expansions inside ${..} need to be quoted separately,
+        #           otherwise the match as pattern
+        # shellcheck disable=SC2295
         mkdocs_log "INFO" "Create dir **${dir##*${MKDOCS_ROOT}\/}**."
         mkdir -p "${dir}"
       fi
@@ -405,6 +400,9 @@ main()
         fi
       elif [[ "${file_to}" =~ \/mkdocs.local.yml ]]
       then
+        # - SC2295: Expansions inside ${..} need to be quoted separately,
+        #           otherwise the match as pattern
+        # shellcheck disable=SC2295
         mkdocs_log "INFO" "Updating ${file_to##*${MKDOCS_ROOT}\/}"
         cat "${file_from}" > "${file_to}"
         echo "  - Example: example.md" >> "${file_to}"

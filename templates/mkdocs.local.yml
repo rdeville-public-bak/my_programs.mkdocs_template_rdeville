@@ -41,9 +41,15 @@ theme:
   # as flags and can be enabled by listing them in mkdocs.yml under
   # theme.features:
   features:
-    - navigation.tabs
+    - content.code.annotate
+    - navigation.indexes
     - navigation.instant
+    - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
   # Setting colors palette
   palette:
       # Light mode
@@ -75,6 +81,8 @@ theme:
 # Extensions
 # ---------------------------------------------------------------------------
 markdown_extensions:
+  # Allow to include markdown files
+  # https://github.com/sethen/markdown-include
   - markdown_include.include:
       base_path: ./
   # Python Markdown Extensions
@@ -152,9 +160,6 @@ plugins:
   - git-revision-date-localized:
       locale: en
       fallback_to_build_date: true
-    # https://github.com/oprypin/mkdocs-section-index
-    # MkDocs plugin to allow clickable sections that lead to an index page
-  - section-index:
     # https://github.com/apenwarr/mkdocs-exclude
     # A mkdocs plugin that lets you exclude files or trees.
   - exclude:

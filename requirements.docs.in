@@ -14,7 +14,7 @@ mkdocs
 
 # A Material Design theme for MkDocs
 # https://pypi.org/project/mkdocs-material/
-mkdocs-material>=7.1
+mkdocs-material>=8.0
 
 # Plugin for adding monorepository support in Mkdocs.
 # https://pypi.org/project/mkdocs-monorepo-plugin/
@@ -24,10 +24,6 @@ mkdocs-monorepo-plugin
 # modification of a markdown file.
 # https://pypi.org/project/mkdocs-git-revision-date-localized-plugin/
 mkdocs-git-revision-date-localized-plugin
-
-# MkDocs plugin to allow clickable sections that lead to an index page
-# https://pypi.org/project/mkdocs-section-index/
-mkdocs-section-index
 
 # Automatic documentation from sources, for MkDocs.
 # https://pypi.org/project/mkdocstrings/
