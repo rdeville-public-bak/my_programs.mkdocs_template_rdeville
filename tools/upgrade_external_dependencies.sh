@@ -112,6 +112,9 @@ main()
     then
       mkdir -p "$(dirname "${out_file}")"
     fi
+    # - SC2295: Expansions inside ${..} need to be quoted separately, otherwise
+    #           they match as patterns.
+    # shellcheck disable=SC2295
     echo "Downloading ${out_file##*${SCRIPTPATH}\/}"
     wget -q "${SOURCE_URL}${i_file}" -O "${out_file}"
   }
