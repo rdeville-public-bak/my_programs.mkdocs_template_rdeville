@@ -26,7 +26,7 @@ workflow:
 
 # Include other gitlab-ci.yml files
 include:
-  - local: "**/docs/.gitlab-ci.yml"
+  - local: docs/.gitlab-ci.yml
 
 ### END MKDOCS TEMPLATE ###
 
@@ -58,8 +58,6 @@ variables:
 # https://docs.gitlab.com/ee/ci/yaml/README.html#before_script
 .before_script_python_dependencies: &before_script_python_dependencies
   before_script:
-    # Go to the right directory
-    - cd "${CI_CONFIG_PATH%/*}"
     # Add python dependencies
     - apk update
     # Install base package required for mkdocs builds
@@ -140,8 +138,7 @@ test_tox_format_python:
   <<: *tag_docker
   <<: *image_docker
   <<: *stage_test
-  before_script:
-    - *before_script_python_dependencies
+  <<: *before_script_python_dependencies
   script:
     # Install python tox
     - pip3 install tox
@@ -152,8 +149,7 @@ test_tox_format_shell:
   <<: *tag_docker
   <<: *image_docker
   <<: *stage_test
-  before_script:
-    - *before_script_python_dependencies
+  <<: *before_script_python_dependencies
   script:
     # Install python tox
     - pip3 install tox

@@ -47,8 +47,6 @@ variables:
 # -----------------------------------------------------------------------------
 # https://docs.gitlab.com/ee/ci/yaml/README.html#before_script
 .before_script_python_dependencies: &before_script_python_dependencies
-  # Go to main .gitlab-ci.yml location
-  - cd "${CI_CONFIG_PATH%/*}"
   # Add python dependencies
   - apk update
   # Install base package required for mkdocs builds
@@ -66,8 +64,6 @@ variables:
   - source .venv/bin/activate
 
 .before_script_prepare_deployment: &before_script_prepare_deployment
-  # Go to main .gitlab-ci.yml location
-  - cd "${CI_CONFIG_PATH%/*}"
   # Add rsync dependencies
   - apk update
   - apk add --no-cache --update-cache
@@ -85,43 +81,6 @@ variables:
   - eval $(ssh-agent -s)
   # Add the private SSH key to be able to connect to the perso LIRIS website
   - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
-  # Get latest information (minaly to get tag)
-  - git fetch --all
-  # Parse tag vMAJOR.MINOR.PATCH to extract information MAJOR.MINOR
-  - export LAST_TAG="$(git describe --tags `git rev-list --tags --max-count=1`)"
-  - export LAST_TAG="${LAST_TAG/v/}"
-  - export LAST_TAG="${LAST_TAG%.*}"
-  # Setup path where files will be sent depending on DEPLOY_TYPE (dev, pre_prod,
-  # prod)
-  - |
-    case "${CI_DEPLOY_TYPE}" in
-      "dev")
-        if [[ -n "${RSYNC_BASE_PATH}" ]];
-        then
-          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
-        else
-          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
-        fi
-        ;;
-      "pre_prod")
-        if [[ -n "${RSYNC_BASE_PATH}" ]];
-        then
-          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
-        else
-          export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
-        fi
-        ;;
-      "prod")
-        if [[ -n "${RSYNC_BASE_PATH}" ]];
-        then
-          export PROJECT_PATH="/${RSYNC_BASE_PATH}/";
-        else
-          export PROJECT_PATH="/"
-        fi
-        ;;
-    esac
-  - export RSYNC_PATH="${PROJECT_PATH}${LAST_TAG}"
-  - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}latest"
 
 .before_script_export_variable: &before_script_export_variable
   # Update values of some variables depending on the CI_DEPLOY_TYPE
@@ -341,7 +300,7 @@ build_html:
     - mkdocs build
   artifacts:
     paths:
-      - ${CI_CONFIG_PATH%/*}/site/
+      - site/
 
 # Jobs in deploy stage
 # -----------------------------------------------------------------------------
@@ -356,6 +315,39 @@ script_deploy_html: &script_deploy_html
     - *before_script_export_variable
     - *before_script_prepare_deployment
   script:
+    - git fetch --all
+    - export LAST_TAG="$(git describe --tags `git rev-list --tags --max-count=1`)"
+    - export LAST_TAG="${LAST_TAG/v/}"
+    - export LAST_TAG="${LAST_TAG%.*}"
+    - |
+      case "${CI_DEPLOY_TYPE}" in
+        "dev")
+          if [[ -n "${RSYNC_BASE_PATH}" ]];
+          then
+            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
+          else
+            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
+          fi
+          ;;
+        "pre_prod")
+          if [[ -n "${RSYNC_BASE_PATH}" ]];
+          then
+            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/${RSYNC_BASE_PATH}/";
+          else
+            export PROJECT_PATH="/${CI_COMMIT_BRANCH}/"
+          fi
+          ;;
+        "prod")
+          if [[ -n "${RSYNC_BASE_PATH}" ]];
+          then
+            export PROJECT_PATH="/${RSYNC_BASE_PATH}/";
+          else
+            export PROJECT_PATH="/"
+          fi
+          ;;
+      esac
+    - export RSYNC_PATH="${PROJECT_PATH}${LAST_TAG}"
+    - export ONLINE_PATH="${ONLINE_DEST}${PROJECT_PATH}latest"
     - mkdir -p "tmp/${RSYNC_PATH}"
     - mv site/* "tmp/${RSYNC_PATH}/"
     - |
@@ -382,7 +374,7 @@ script_deploy_html: &script_deploy_html
         Redirecting to <a href='${ONLINE_PATH}'>${ONLINE_PATH}</a>...\n
       </body>\n
       </html>" > tmp/${PROJECT_PATH}/index.html
-    - rsync --no-perms -Oavz "tmp/" "${RSYNC_DEST}"
+    - rsync -Oavz "tmp/" "${RSYNC_DEST}"
   rules:
     - *rules_prod
     - *rules_pre_prod

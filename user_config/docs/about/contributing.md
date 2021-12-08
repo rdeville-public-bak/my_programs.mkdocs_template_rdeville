@@ -12,11 +12,11 @@ Modified content will be overwritten when updating
 This project welcomes contributions from developers and users in the open source
 community. Contributions can be made in a number of ways, a few examples are :
 
-* Code patch via pull requests
-* Documentation improvements
-* Bug reports and patch reviews
-* Proposition of new features
-* etc.
+  * Code patch via pull requests
+  * Documentation improvements
+  * Bug reports and patch reviews
+  * Proposition of new features
+  * etc.
 
 ## Reporting an Issue
 
@@ -36,10 +36,10 @@ For more information, you can refers to the main [developers
 guides][developers_guides] which is the common resources I use for all
 my projects. There you will find:
 
-* [Syntax Guide][syntax_guide], which describe syntax guidelines per language
-  to follow if you want to contribute.
-* [Contributing workflow][contributing_workflow], which provide an example
-  of the workflow I used for the development.
+  * [Syntax Guide][syntax_guide], which describe syntax guidelines per language
+    to follow if you want to contribute.
+  * [Contributing workflow][contributing_workflow], which provide an example
+    of the workflow I used for the development.
 
 [developers_guides]: {{ site_base_url }}/latest/dev_guides/index.html
 [syntax_guide]: {{ site_base_url }}/latest/dev_guides/style_guides/index.html
