@@ -270,6 +270,9 @@ main_post_setup()
 
     local file_from="$1"
     local file_to="$2"
+    # - SC2295: Expansions inside ${..} need to be quoted separately, otherwise
+    #           they match as patterns.
+    # shellcheck disable=SC2295
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
     local tmp_file_from="${MKDOCS_TMP}/${relative_file_to}.new"
     local tmp_file_to="${MKDOCS_TMP}/${relative_file_to}.old"
@@ -294,6 +297,9 @@ main_post_setup()
     if [[ "$(sha1sum "${tmp_file_from}" | cut -d " " -f 1 )" \
        != "$(sha1sum "${tmp_file_to}"   | cut -d " " -f 1 )" ]]
     then
+      # - SC2295: Expansions inside ${..} need to be quoted separately, otherwise
+      #           they match as patterns.
+      # shellcheck disable=SC2295
       mkdocs_log "INFO" "Backup file **${relative_file_to}** to **${bak_file##*${MKDOCS_ROOT}\/}.**"
       if ! [[ -d "${bak_dir}" ]]
       then
@@ -338,6 +344,9 @@ main_post_setup()
 
     local file_from="$1"
     local file_to="$2"
+    # - SC2295: Expansions inside ${..} need to be quoted separately, otherwise
+    #           they match as patterns.
+    # shellcheck disable=SC2295
     local relative_file_to="${file_to##*${MKDOCS_ROOT}\/}"
     local begin="<!-- BEGIN MKDOCS TEMPLATE -->"
     local end="<!-- END MKDOCS TEMPLATE -->"
