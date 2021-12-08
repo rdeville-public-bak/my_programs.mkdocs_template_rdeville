@@ -10,6 +10,10 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.5 <small>(08/12/2021)</small>
+
+  * ⬆📝 Upgrade documentation content from v1.0.4-RD.2 template
+
 ### 🔖 v1.0.4 <small>(07/12/2021)</small>
 
   * 🚨 Fix pylint and shellcheck warning
