@@ -10,20 +10,23 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
-### 🔖 v1.0.5-RD.2 <small>(08/08/2021)</small>
+### 🔖 v1.0.5-RD.2 <small>(09/12/2021)</small>
+
+  * 🔥 Remove with-pdf plugins from mkdocs_template user_config
+
+### 🔖 v1.0.5-RD.2 <small>(08/12/2021)</small>
 
   * 🚨 Fix shellcheck linter warning
 
-
-### 🔖 v1.0.5-RD.1 <small>(08/08/2021)</small>
+### 🔖 v1.0.5-RD.1 <small>(08/12/2021)</small>
 
   * ⬆📝 Upgrade documentation content from v1.0.4-RD.2 template
 
-### 🔖 v1.0.4-RD.2 <small>(08/08/2021)</small>
+### 🔖 v1.0.4-RD.2 <small>(08/12/2021)</small>
 
   * ⬆🔧 Upgrade user config template (mainly markdown files and .gitlab-ci)
 
-### 🔖 v1.0.4-RD.1 <small>(08/08/2021)</small>
+### 🔖 v1.0.4-RD.1 <small>(08/12/2021)</small>
 
   * ⬆🔧 Upgrade mkdocs config template
 
