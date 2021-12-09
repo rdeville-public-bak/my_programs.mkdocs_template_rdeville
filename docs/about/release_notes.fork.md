@@ -12,6 +12,11 @@ Modified content will be overwritten when updating
 
 ### 🔖 v1.0.5-RD.4 <small>(09/12/2021)</small>
 
+  * 🐛 Fix jinja2 call to wrong variable in docs/index.fork.md
+  * Fetch with main repo
+
+### 🔖 v1.0.5-RD.4 <small>(09/12/2021)</small>
+
   * 🐛 Fix jinja2 call to wrong variable in docs/index.md
 
 ### 🔖 v1.0.5-RD.3 <small>(09/12/2021)</small>
@@ -60,6 +65,12 @@ Mkdocs Template.
 ??? info "Release Note from [mkdocs_template]({{ mkdocs_template_url}})"
 
     ## 🔖 v1.0
+
+    ### 🔖 v1.0.6 <small>(08/12/2021)</small>
+
+      * ⬆📝 Upgrade documentation content to use v1.0.5-RD.4 from
+        mkdocs_template_rdeville
+
 
     ### 🔖 v1.0.5 <small>(08/12/2021)</small>
 
