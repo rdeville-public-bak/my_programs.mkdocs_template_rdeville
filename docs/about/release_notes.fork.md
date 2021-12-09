@@ -10,7 +10,11 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
-### 🔖 v1.0.5-RD.2 <small>(09/12/2021)</small>
+### 🔖 v1.0.5-RD.4 <small>(09/12/2021)</small>
+
+  * 🐛 Fix jinja2 call to wrong variable in docs/index.md
+
+### 🔖 v1.0.5-RD.3 <small>(09/12/2021)</small>
 
   * 🔥 Remove with-pdf plugins from mkdocs_template user_config
 
