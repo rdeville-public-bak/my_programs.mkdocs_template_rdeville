@@ -290,31 +290,6 @@ plugins:
             # (see docs/_data/plugins.py)
 # DO NOT FORGET TO ADD/UPDATE THE \`nav\` KEY BELOW.
 ### END MKDOCS TEMPLATE ###
-#   - with-pdf:
-#       cover: true
-#       back_cover: true
-#       cover_subtitle: ""
-#       toc_title: "Table of Content"
-#       toc_level: 6
-#       ordered_chapter_level: 3
-#       excludes_children:
-#           - 'release-notes/:upgrading'
-#           - 'release-notes/:changelog'
-#       exclude_pages:
-#           - 'bugs/'
-#           - 'appendix/contribute/'
-#           - src: IFRAME SRC
-#             img: POSTER IMAGE URL
-#             text: ALTERNATE TEXT
-#           - src: ...
-#       two_columns_level: 3
-#       render_js: true
-#       headless_chrome_path: headless-chromium
-#       output_path: any-place/document.pdf
-#       enabled_if_env: ENABLE_PDF_EXPORT
-#       debug_html: true
-#       show_anchors: true
-#       verbose: true
 #  - redirects: # WARNING, INCOMPATIBLE WITH `with-pdf`
 #      redirect_maps:
 #        index.md: index.fork.md
