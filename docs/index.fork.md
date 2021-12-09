@@ -15,7 +15,7 @@ Modified content will be overwritten when updating
 <div align="center">
 
   <!-- Project Title -->
-  <a href="{{ git_platform.url }}{{ curr_repo.repo_path_with_namespace }}">
+  <a href="{{ git_platform.url }}{{ curr_repo.git_slug_with_namespace }}">
     <img src="{{ curr_repo.logo }}" width="200px">
     <h1>{{ curr_repo.name }}</h1>
   </a>
