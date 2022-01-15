@@ -10,6 +10,10 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
+### 🔖 v1.0.6 <small>(15/01/2022)</small>
+
+  * 🐛 Fix bug where when upgrading not escaping sed char.
+
 ### 🔖 v1.0.5 <small>(08/12/2021)</small>
 
   * ⬆📝 Upgrade documentation content from v1.0.4-RD.2 template
