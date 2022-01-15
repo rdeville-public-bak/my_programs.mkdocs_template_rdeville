@@ -10,7 +10,11 @@ Modified content will be overwritten when updating
 
 ## 🔖 v1.0
 
-### 🔖 v1.0.5-RD.4 <small>(09/12/2021)</small>
+### 🔖 v1.0.6-RD.1 <small>(15/01/2022)</small>
+
+  * Fetch with main repo
+
+### 🔖 v1.0.5-RD.5 <small>(09/12/2021)</small>
 
   * 🐛 Fix jinja2 call to wrong variable in docs/index.fork.md
   * Fetch with main repo
