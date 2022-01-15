@@ -603,10 +603,13 @@ ${end}"
           fi
           cp "${file_to}" "${bak_file}"
 
+          local begin_escaped="$(echo "${begin}" | sed -e 's|/|\\/|g' -e 's|*|\\*|g' )"
+          local end_escaped="$(echo "${end}" | sed -e 's|/|\\/|g' -e 's|*|\\*|g' )"
+
           mkdocs_log "INFO" "Upgrading file **${relative_file_to}**."
-          grep -B 1000000 "${begin}" "${file_to}" | sed -e "s/${begin}//g" > "${tmp_file_to}"
+          grep -B 1000000 "${begin}" "${file_to}" | sed -e "s/${begin_escaped}//g" > "${tmp_file_to}"
           cat "${tmp_file_from}" >> "${tmp_file_to}"
-          grep -A 1000000 "${end}" "${file_to}" | sed -e "s/${end}//g" >> "${tmp_file_to}"
+          grep -A 1000000 "${end}" "${file_to}" | sed -e "s/${end_escaped}//g" >> "${tmp_file_to}"
           cat "${tmp_file_to}" > "${file_to}"
         fi
       elif [[ "$(sha1sum "${file_from}" | cut -d " " -f 1 )" \
@@ -621,6 +624,8 @@ ${end}"
           mkdir -p "${bak_dir}"
         fi
         cp "${file_to}" "${bak_file}"
+
+        mkdocs_log "INFO" "nnnnnnnn"
         mkdocs_log "INFO" "Upgrading file **${relative_file_to}**."
         cp "${file_from}" "${file_to}"
       fi
